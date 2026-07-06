@@ -1,0 +1,6 @@
+{
+  "name": "Axiom Focus",
+  "description": "A high-performance environment for focus, goals, and planning with structured Pomodoro sessions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
