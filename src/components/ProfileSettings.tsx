@@ -20,6 +20,8 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
   const [goalMilestones, setGoalMilestones] = useState(profile.goalMilestones);
   
   const [showAvatarSelector, setShowAvatarSelector] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const activeCategory = selectedCategory || AVATARS.find((a) => a.id === avatar)?.category || 'Adult';
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -120,25 +122,88 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
 
             {/* Hidden Avatar Carousel */}
             {showAvatarSelector && (
-              <div className="bg-[#051120] border border-[#e0a96d]/20 p-4 rounded-xl">
-                <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider block mb-3 font-semibold">Choose Your Node Agent Icon</span>
-                <div className="grid grid-cols-4 gap-3">
-                  {AVATARS.map((av) => (
+              <div className="bg-[#051120] border border-[#e0a96d]/20 p-5 rounded-xl space-y-4">
+                <div className="flex items-center justify-between border-b border-[#12243d] pb-2">
+                  <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider font-semibold">
+                    Choose Your Node Agent Icon
+                  </span>
+                  <span className="text-[9px] bg-[#e0a96d]/10 text-[#e0a96d] px-2 py-0.5 rounded-full font-mono uppercase">
+                    {AVATARS.length} Agents
+                  </span>
+                </div>
+
+                {/* Segmented controls for Age Group Category */}
+                <div className="grid grid-cols-4 gap-1 bg-[#071324] p-1 rounded-xl border border-[#1a2c42]">
+                  {['Child', 'Adult', 'Older Adult', 'Senior'].map((cat) => (
                     <button
-                      key={av.id}
+                      key={cat}
                       type="button"
-                      onClick={() => {
-                        setAvatar(av.id);
-                        setShowAvatarSelector(false);
-                      }}
-                      className={`p-2 bg-[#0b1d31] hover:bg-[#10243d] border rounded-xl transition-all flex flex-col items-center gap-1.5 ${
-                        avatar === av.id ? 'border-[#e0a96d] bg-[#10243d]' : 'border-[#1a2c42]'
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-wider font-bold rounded-lg transition-all ${
+                        activeCategory === cat
+                          ? 'bg-[#e0a96d] text-[#071324] shadow-md'
+                          : 'text-gray-400 hover:text-white hover:bg-[#0b1d31]'
                       }`}
                     >
-                      <div className="w-10 h-10" dangerouslySetInnerHTML={{ __html: av.svg }} />
-                      <span className="text-[9px] font-mono text-gray-400">{av.name}</span>
+                      {cat}
                     </button>
                   ))}
+                </div>
+
+                {/* Displaying subcategories under the selected Age Group Category */}
+                <div className="space-y-4 pt-1">
+                  {Array.from(
+                    new Set(
+                      AVATARS.filter((a) => a.category === activeCategory).map(
+                        (a) => a.subcategory
+                      )
+                    )
+                  ).map((subcat) => {
+                    const subcatAvatars = AVATARS.filter(
+                      (a) =>
+                        a.category === activeCategory &&
+                        a.subcategory === subcat
+                    );
+                    return (
+                      <div key={subcat} className="space-y-2">
+                        <h4 className="text-[9px] font-mono text-[#e0a96d]/80 uppercase tracking-widest font-bold flex items-center gap-2">
+                          <span className="w-1 h-1 rounded-full bg-[#e0a96d]/50" />
+                          <span>{subcat}s</span>
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {subcatAvatars.map((av) => (
+                            <button
+                              key={av.id}
+                              type="button"
+                              onClick={() => {
+                                setAvatar(av.id);
+                                setShowAvatarSelector(false);
+                                setSelectedCategory(null);
+                              }}
+                              className={`p-3 bg-[#0b1d31] hover:bg-[#10243d] border rounded-xl transition-all flex items-center gap-3 text-left ${
+                                avatar === av.id
+                                  ? 'border-[#e0a96d] bg-[#10243d]'
+                                  : 'border-[#1a2c42]'
+                              }`}
+                            >
+                              <div
+                                className="w-10 h-10 rounded-lg bg-[#111827] p-0.5 shrink-0"
+                                dangerouslySetInnerHTML={{ __html: av.svg }}
+                              />
+                              <div className="min-w-0">
+                                <span className="text-[11px] font-bold text-white block truncate">
+                                  {av.name}
+                                </span>
+                                <span className="text-[9px] text-gray-500 font-mono block uppercase">
+                                  {av.subcategory}
+                                </span>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
