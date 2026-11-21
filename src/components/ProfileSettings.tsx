@@ -41,15 +41,15 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
   const selectedAvatarData = AVATARS.find((a) => a.id === avatar) || AVATARS[0];
 
   return (
-    <div id="settings-tab" className="flex-1 overflow-y-auto text-[#FFFFFF] p-5 sm:p-8 md:p-10 flex flex-col justify-between min-h-full">
+    <div id="settings-tab" className="flex-1 overflow-y-auto text-[#171717] p-5 sm:p-8 md:p-10 flex flex-col justify-between min-h-full">
       <form onSubmit={handleSubmit} className="space-y-7 max-w-6xl w-full mx-auto">
         
         {/* Header Title & Action buttons */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#1D3555] pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#F7E7B0] pb-6">
           <div>
-            <span className="text-xs font-medium text-[#00A3FF] block mb-1">Workspace Preferences</span>
-            <h2 className="text-3xl md:text-4xl font-bold font-display leading-tight text-[#FFFFFF]">Profile & Settings</h2>
-            <p className="text-sm text-[#A8B8CC] mt-1.5 max-w-2xl">
+            <span className="text-xs font-semibold text-[#A67C00] block mb-1">Workspace Preferences</span>
+            <h2 className="text-3xl md:text-4xl font-bold font-display leading-tight text-[#171717]">Profile & Settings</h2>
+            <p className="text-sm text-[#666666] mt-1.5 max-w-2xl">
               Manage your identity, configure your focus notifications, and maintain your system preferences.
             </p>
           </div>
@@ -72,20 +72,20 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
         </div>
 
         {/* Somali quote banner */}
-        <div className="axiom-card border-[#00A3FF]/30 rounded-2xl p-6 text-center relative overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-[#0066FF]/12 rounded-full blur-3xl pointer-events-none" />
-          <p className="text-sm md:text-base font-semibold font-display text-[#00A3FF] italic leading-relaxed max-w-4xl mx-auto z-10 relative">
+        <div className="axiom-card border-[#D4AF37]/50 rounded-2xl p-6 text-center relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-[#FFD700]/15 rounded-full blur-3xl pointer-events-none" />
+          <p className="text-sm md:text-base font-semibold font-display text-[#A67C00] italic leading-relaxed max-w-4xl mx-auto z-10 relative">
             "wali dhismo ayaa ku socda wepsite kaan, mahadsanid sida quruxda badan aad uso boqatey wepkayga"
           </p>
-          <span className="text-xs text-[#A8B8CC] block mt-2 z-10 relative">
+          <span className="text-xs text-[#666666] block mt-2 z-10 relative">
             Axiom System Notification · Translation: Development Active · Thank You for Visiting
           </span>
         </div>
 
         {/* Saved Success Notification */}
         {savedSuccess && (
-          <div className="bg-emerald-500/12 border border-emerald-500/30 text-emerald-300 rounded-xl p-4 flex items-center gap-3 text-sm">
-            <Check size={16} className="text-emerald-400 shrink-0" />
+          <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl p-4 flex items-center gap-3 text-sm">
+            <Check size={16} className="text-emerald-600 shrink-0" />
             <span>Profile and system preferences saved successfully!</span>
           </div>
         )}
@@ -95,22 +95,22 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
           
           {/* Card 1: Personal Identity */}
           <div className="axiom-card rounded-2xl p-6 space-y-6">
-            <div className="border-b border-[#1D3555] pb-3">
-              <h3 className="text-base font-bold font-display text-[#FFFFFF]">Personal Identity</h3>
-              <p className="text-xs text-[#A8B8CC] mt-0.5">Customize your avatar and account details</p>
+            <div className="border-b border-[#F7E7B0] pb-3">
+              <h3 className="text-base font-bold font-display text-[#171717]">Personal Identity</h3>
+              <p className="text-xs text-[#666666] mt-0.5">Customize your avatar and account details</p>
             </div>
 
             {/* Avatar Selector Block */}
             <div className="axiom-inset p-4 rounded-xl flex items-center gap-5">
               <div 
-                className="w-16 h-16 rounded-2xl overflow-hidden bg-[#101F35] border border-[#00A3FF]/35 p-1 flex-shrink-0 cursor-pointer hover:border-[#00A3FF] transition-colors" 
+                className="w-16 h-16 rounded-2xl overflow-hidden bg-[#FFFFFF] border border-[#D4AF37]/55 p-1 flex-shrink-0 cursor-pointer hover:border-[#A67C00] transition-colors shadow-sm" 
                 dangerouslySetInnerHTML={{ __html: selectedAvatarData.svg }}
                 onClick={() => setShowAvatarSelector(!showAvatarSelector)}
                 title="Click to select different avatar"
               />
               <div className="space-y-1">
-                <span className="text-sm font-semibold text-[#FFFFFF] block">Profile Avatar</span>
-                <span className="text-xs text-[#A8B8CC] block mb-2.5">Your current identity representation across the workspace.</span>
+                <span className="text-sm font-semibold text-[#171717] block">Profile Avatar</span>
+                <span className="text-xs text-[#666666] block mb-2.5">Your current identity representation across the workspace.</span>
                 <button
                   type="button"
                   onClick={() => setShowAvatarSelector(!showAvatarSelector)}
@@ -123,17 +123,17 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
 
             {/* Expandable Avatar Selector */}
             {showAvatarSelector && (
-              <div className="axiom-inset border-[#00A3FF]/30 p-5 rounded-xl space-y-4">
-                <div className="flex items-center justify-between border-b border-[#1D3555] pb-2.5">
-                  <span className="text-xs font-medium text-[#A8B8CC]">
+              <div className="axiom-inset border-[#D4AF37]/55 p-5 rounded-xl space-y-4">
+                <div className="flex items-center justify-between border-b border-[#F7E7B0] pb-2.5">
+                  <span className="text-xs font-medium text-[#666666]">
                     Choose Your Avatar
                   </span>
-                  <span className="text-xs text-[#00A3FF] font-mono tabular-nums">
+                  <span className="text-xs text-[#A67C00] font-semibold font-mono tabular-nums">
                     {AVATARS.length} available
                   </span>
                 </div>
 
-                <div className="grid grid-cols-4 gap-1 bg-[#07111F] p-1 rounded-xl border border-[#1D3555]">
+                <div className="grid grid-cols-4 gap-1 bg-[#FFFFFF] p-1 rounded-xl border border-[#F7E7B0]">
                   {['Child', 'Adult', 'Older Adult', 'Senior'].map((cat) => (
                     <button
                       key={cat}
@@ -141,8 +141,8 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
                       onClick={() => setSelectedCategory(cat)}
                       className={`py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer truncate px-1 ${
                         activeCategory === cat
-                          ? 'bg-[#0066FF] text-[#FFFFFF] font-semibold shadow-sm'
-                          : 'text-[#A8B8CC] hover:text-[#FFFFFF] hover:bg-[#101F35]'
+                          ? 'bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] text-[#171717] font-semibold shadow-sm'
+                          : 'text-[#666666] hover:text-[#171717] hover:bg-[#FFFDF5]'
                       }`}
                     >
                       {cat}
@@ -165,7 +165,7 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
                     );
                     return (
                       <div key={subcat} className="space-y-2">
-                        <h4 className="text-xs font-medium text-[#00A3FF]">
+                        <h4 className="text-xs font-semibold text-[#A67C00]">
                           {subcat}s
                         </h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -180,19 +180,19 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
                               }}
                               className={`p-3 rounded-xl border transition-all flex items-center gap-3 text-left cursor-pointer ${
                                 avatar === av.id
-                                  ? 'border-[#00A3FF] bg-[#0066FF]/15'
-                                  : 'border-[#1D3555] bg-[#101F35] hover:bg-[#0B172A] hover:border-[#00A3FF]/45'
+                                  ? 'border-[#D4AF37] bg-gradient-to-r from-[#FFF4B0]/55 to-[#FFFDF5] shadow-sm'
+                                  : 'border-[#F7E7B0] bg-[#FFFFFF] hover:bg-[#FFFDF5] hover:border-[#D4AF37]/60'
                               }`}
                             >
                               <div
-                                className="w-10 h-10 rounded-lg bg-[#07111F] p-0.5 shrink-0"
+                                className="w-10 h-10 rounded-lg bg-[#FAFAFA] border border-[#F7E7B0] p-0.5 shrink-0"
                                 dangerouslySetInnerHTML={{ __html: av.svg }}
                               />
                               <div className="min-w-0">
-                                <span className="text-xs font-semibold text-[#FFFFFF] block truncate">
+                                <span className="text-xs font-semibold text-[#171717] block truncate">
                                   {av.name}
                                 </span>
-                                <span className="text-[11px] text-[#A8B8CC] block">
+                                <span className="text-[11px] text-[#666666] block">
                                   {av.subcategory}
                                 </span>
                               </div>
@@ -210,7 +210,7 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">First Name</label>
+                  <label className="text-xs font-medium text-[#666666] block mb-1.5">First Name</label>
                   <input
                     type="text"
                     required
@@ -220,7 +220,7 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Last Name</label>
+                  <label className="text-xs font-medium text-[#666666] block mb-1.5">Last Name</label>
                   <input
                     type="text"
                     required
@@ -232,7 +232,7 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
               </div>
 
               <div>
-                <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Email Address</label>
+                <label className="text-xs font-medium text-[#666666] block mb-1.5">Email Address</label>
                 <input
                   type="email"
                   required
@@ -246,9 +246,9 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
 
           {/* Card 2: Focus Signals */}
           <div className="axiom-card rounded-2xl p-6 space-y-5">
-            <div className="border-b border-[#1D3555] pb-3">
-              <h3 className="text-base font-bold font-display text-[#FFFFFF]">Focus Signals</h3>
-              <p className="text-xs text-[#A8B8CC] mt-0.5 leading-relaxed">
+            <div className="border-b border-[#F7E7B0] pb-3">
+              <h3 className="text-base font-bold font-display text-[#171717]">Focus Signals</h3>
+              <p className="text-xs text-[#666666] mt-0.5 leading-relaxed">
                 Configure how Axiom delivers reminders while keeping notifications minimal.
               </p>
             </div>
@@ -256,8 +256,8 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
             {/* Toggle Switch 1 */}
             <div className="axiom-inset p-4 rounded-xl flex items-center justify-between gap-4">
               <div className="space-y-0.5">
-                <span className="text-sm font-semibold text-[#FFFFFF] block">Motivational Reminders</span>
-                <span className="text-xs text-[#A8B8CC] block">Daily nudges to maintain steady momentum.</span>
+                <span className="text-sm font-semibold text-[#171717] block">Motivational Reminders</span>
+                <span className="text-xs text-[#666666] block">Daily nudges to maintain steady momentum.</span>
               </div>
               <button
                 type="button"
@@ -265,12 +265,12 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
                 aria-checked={motivationalReminders}
                 aria-label="Toggle motivational reminders"
                 onClick={() => setMotivationalReminders(!motivationalReminders)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer shrink-0 ${
-                  motivationalReminders ? 'bg-[#0066FF]' : 'bg-[#1D3555]'
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer shrink-0 border ${
+                  motivationalReminders ? 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] border-[#A67C00]/50' : 'bg-[#FAFAFA] border-[#F7E7B0]'
                 }`}
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-[#FFFFFF] transition-transform ${
+                  className={`inline-block h-4 w-4 transform rounded-full bg-[#FFFFFF] shadow-sm border border-[#D4AF37]/30 transition-transform ${
                     motivationalReminders ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
@@ -280,8 +280,8 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
             {/* Toggle Switch 2 */}
             <div className="axiom-inset p-4 rounded-xl flex items-center justify-between gap-4">
               <div className="space-y-0.5">
-                <span className="text-sm font-semibold text-[#FFFFFF] block">Goal Milestones</span>
-                <span className="text-xs text-[#A8B8CC] block">Alerts when passing major strategic milestones.</span>
+                <span className="text-sm font-semibold text-[#171717] block">Goal Milestones</span>
+                <span className="text-xs text-[#666666] block">Alerts when passing major strategic milestones.</span>
               </div>
               <button
                 type="button"
@@ -289,12 +289,12 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
                 aria-checked={goalMilestones}
                 aria-label="Toggle goal milestones alerts"
                 onClick={() => setGoalMilestones(!goalMilestones)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer shrink-0 ${
-                  goalMilestones ? 'bg-[#0066FF]' : 'bg-[#1D3555]'
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer shrink-0 border ${
+                  goalMilestones ? 'bg-gradient-to-r from-[#D4AF37] to-[#FFD700] border-[#A67C00]/50' : 'bg-[#FAFAFA] border-[#F7E7B0]'
                 }`}
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-[#FFFFFF] transition-transform ${
+                  className={`inline-block h-4 w-4 transform rounded-full bg-[#FFFFFF] shadow-sm border border-[#D4AF37]/30 transition-transform ${
                     goalMilestones ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
@@ -302,10 +302,10 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
             </div>
 
             {/* Persistence info panel */}
-            <div className="bg-[#0066FF]/10 border border-[#00A3FF]/25 p-4 rounded-xl flex items-start gap-3">
-              <AlertCircle size={16} className="text-[#00A3FF] mt-0.5 flex-shrink-0" />
-              <div className="text-xs text-[#A8B8CC] leading-relaxed">
-                <strong className="text-[#FFFFFF] block mb-0.5">Persistence Status</strong>
+            <div className="bg-gradient-to-r from-[#FFFDF5] to-[#FFF4B0]/35 border border-[#D4AF37]/45 p-4 rounded-xl flex items-start gap-3">
+              <AlertCircle size={16} className="text-[#A67C00] mt-0.5 flex-shrink-0" />
+              <div className="text-xs text-[#666666] leading-relaxed">
+                <strong className="text-[#171717] block mb-0.5">Persistence Status</strong>
                 Your profile updates sync to your Axiom account or browser sandbox storage automatically.
               </div>
             </div>

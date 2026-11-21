@@ -98,8 +98,8 @@ export default function Auth({ onAuthSuccess, onContinueAsGuest }: AuthProps) {
   return (
     <div id="auth-fullscreen-container" className="fixed inset-0 z-50 flex items-center justify-center axiom-canvas-bg p-4 font-sans select-none overflow-y-auto">
       {/* Subtle ambient glow accents */}
-      <div className="pointer-events-none fixed top-[-15%] right-[10%] w-[28rem] h-[28rem] rounded-full bg-[#0066FF]/14 blur-3xl" />
-      <div className="pointer-events-none fixed bottom-[-15%] left-[10%] w-[26rem] h-[26rem] rounded-full bg-[#00A3FF]/10 blur-3xl" />
+      <div className="pointer-events-none fixed top-[-15%] right-[10%] w-[28rem] h-[28rem] rounded-full bg-[#FFD700]/16 blur-3xl" />
+      <div className="pointer-events-none fixed bottom-[-15%] left-[10%] w-[26rem] h-[26rem] rounded-full bg-[#F7E7B0]/35 blur-3xl" />
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -110,18 +110,18 @@ export default function Auth({ onAuthSuccess, onContinueAsGuest }: AuthProps) {
         <div className="space-y-6">
           {/* Brand Block */}
           <div className="flex flex-col items-center text-center">
-            <div className="w-14 h-14 bg-[#0B172A] rounded-2xl flex items-center justify-center border border-[#1D3555] relative overflow-hidden shadow-xl mb-4">
-              <svg viewBox="0 0 100 100" className="w-9 h-9 text-[#00A3FF] stroke-current fill-none" strokeWidth="6">
+            <div className="w-14 h-14 bg-gradient-to-br from-[#FFFDF5] via-[#FFF4B0]/65 to-[#F7E7B0]/70 rounded-2xl flex items-center justify-center border border-[#D4AF37]/70 relative overflow-hidden shadow-[0_8px_22px_-6px_rgba(166,124,0,0.3)] mb-4">
+              <svg viewBox="0 0 100 100" className="w-9 h-9 text-[#A67C00] stroke-current fill-none" strokeWidth="6">
                 <circle cx="50" cy="50" r="40" stroke="currentColor" />
                 <circle cx="50" cy="50" r="25" stroke="currentColor" strokeWidth="4" />
                 <circle cx="50" cy="50" r="10" fill="currentColor" />
               </svg>
             </div>
             
-            <h2 className="text-2xl font-bold font-display text-[#FFFFFF] leading-tight tracking-tight">
+            <h2 className="text-2xl font-bold font-display text-[#171717] leading-tight tracking-tight">
               {isSignUp ? 'Create Your Axiom Account' : 'Sign in to Axiom Focus'}
             </h2>
-            <p className="text-xs text-[#A8B8CC] mt-1.5 leading-relaxed max-w-xs">
+            <p className="text-xs text-[#666666] mt-1.5 leading-relaxed max-w-xs">
               {isSignUp ? 'Set up your cloud-synchronized personal performance workspace' : 'Access your goals, milestones, and deep work sessions'}
             </p>
           </div>
@@ -131,9 +131,9 @@ export default function Auth({ onAuthSuccess, onContinueAsGuest }: AuthProps) {
             {isSignUp && (
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-[#A8B8CC] block">First Name</label>
+                  <label className="text-xs font-medium text-[#666666] block">First Name</label>
                   <div className="relative">
-                    <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A8B8CC]" />
+                    <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A67C00]" />
                     <input
                       type="text"
                       required
@@ -145,9 +145,9 @@ export default function Auth({ onAuthSuccess, onContinueAsGuest }: AuthProps) {
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label className="text-xs font-medium text-[#A8B8CC] block">Last Name</label>
+                  <label className="text-xs font-medium text-[#666666] block">Last Name</label>
                   <div className="relative">
-                    <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A8B8CC]" />
+                    <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A67C00]" />
                     <input
                       type="text"
                       required
@@ -163,9 +163,9 @@ export default function Auth({ onAuthSuccess, onContinueAsGuest }: AuthProps) {
 
             {/* Email */}
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-[#A8B8CC] block">Email Address</label>
+              <label className="text-xs font-medium text-[#666666] block">Email Address</label>
               <div className="relative">
-                <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A8B8CC]" />
+                <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A67C00]" />
                 <input
                   type="email"
                   required
@@ -179,9 +179,9 @@ export default function Auth({ onAuthSuccess, onContinueAsGuest }: AuthProps) {
 
             {/* Password */}
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-[#A8B8CC] block">Password</label>
+              <label className="text-xs font-medium text-[#666666] block">Password</label>
               <div className="relative">
-                <LockKeyhole size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A8B8CC]" />
+                <LockKeyhole size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#A67C00]" />
                 <input
                   type="password"
                   required
@@ -195,15 +195,15 @@ export default function Auth({ onAuthSuccess, onContinueAsGuest }: AuthProps) {
 
             {/* Notifications */}
             {error && (
-              <div className="p-3.5 bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs rounded-xl flex items-start gap-2.5 leading-relaxed">
-                <AlertCircle size={16} className="flex-shrink-0 mt-0.5 text-rose-400" />
+              <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl flex items-start gap-2.5 leading-relaxed">
+                <AlertCircle size={16} className="flex-shrink-0 mt-0.5 text-rose-600" />
                 <span>{error}</span>
               </div>
             )}
 
             {success && (
-              <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs rounded-xl flex items-start gap-2.5 leading-relaxed">
-                <CheckCircle2 size={16} className="flex-shrink-0 mt-0.5 text-emerald-400" />
+              <div className="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs rounded-xl flex items-start gap-2.5 leading-relaxed">
+                <CheckCircle2 size={16} className="flex-shrink-0 mt-0.5 text-emerald-600" />
                 <span>{success}</span>
               </div>
             )}
@@ -215,7 +215,7 @@ export default function Auth({ onAuthSuccess, onContinueAsGuest }: AuthProps) {
               className="w-full py-3 px-4 axiom-btn-primary text-sm rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
             >
               {loading ? (
-                <div className="w-4 h-4 border-2 border-[#FFFFFF] border-t-transparent rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-[#171717] border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
                   <span>{isSignUp ? 'Create Account' : 'Sign In'}</span>
@@ -233,7 +233,7 @@ export default function Auth({ onAuthSuccess, onContinueAsGuest }: AuthProps) {
                 setError(null);
                 setSuccess(null);
               }}
-              className="text-xs text-[#A8B8CC] hover:text-[#00A3FF] transition-colors cursor-pointer font-medium"
+              className="text-xs text-[#666666] hover:text-[#A67C00] transition-colors cursor-pointer font-medium"
             >
               {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
             </button>
@@ -241,16 +241,16 @@ export default function Auth({ onAuthSuccess, onContinueAsGuest }: AuthProps) {
         </div>
 
         {/* Separator / Guest Option */}
-        <div className="mt-6 pt-5 border-t border-[#1D3555] flex flex-col items-center space-y-3">
+        <div className="mt-6 pt-5 border-t border-[#F7E7B0] flex flex-col items-center space-y-3">
           <button
             onClick={onContinueAsGuest}
-            className="text-xs font-medium text-[#A8B8CC] hover:text-[#FFFFFF] flex items-center gap-1.5 transition-colors cursor-pointer py-1.5 px-3 rounded-lg hover:bg-[#101F35]"
+            className="text-xs font-medium text-[#666666] hover:text-[#171717] flex items-center gap-1.5 transition-colors cursor-pointer py-1.5 px-3 rounded-lg hover:bg-[#FFFDF5]"
           >
             <span>Continue in Guest Sandbox Mode</span>
-            <ArrowRight size={13} className="text-[#00A3FF]" />
+            <ArrowRight size={13} className="text-[#A67C00]" />
           </button>
           
-          <span className="text-[11px] text-[#A8B8CC]/80 text-center">
+          <span className="text-[11px] text-[#666666]/85 text-center">
             Axiom Peak Performance · Cuthman Adem Sheikh © 2026
           </span>
         </div>

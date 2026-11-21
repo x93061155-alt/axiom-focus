@@ -8,28 +8,29 @@
 }
 
 :root {
-  --axiom-bg-canvas: #07111F;
-  --axiom-bg-elevated: #0B172A;
-  --axiom-bg-surface: #101F35;
-  --axiom-bg-surface-hover: #142844;
-  --axiom-bg-inset: #0B172A;
+  --axiom-bg-canvas: #FFFFFF;
+  --axiom-bg-elevated: #FAFAFA;
+  --axiom-bg-surface: #FFFDF5;
+  --axiom-bg-surface-hover: #FFFDF5;
+  --axiom-bg-inset: #FAFAFA;
 
-  --axiom-border-subtle: #1D3555;
-  --axiom-border-default: #1D3555;
-  --axiom-border-accent: #00A3FF;
+  --axiom-border-subtle: #F7E7B0;
+  --axiom-border-default: rgba(212, 175, 55, 0.35);
+  --axiom-border-accent: #D4AF37;
 
-  --axiom-accent: #0066FF;
-  --axiom-accent-hover: #00A3FF;
-  --axiom-accent-soft: rgba(0, 102, 255, 0.16);
-  --axiom-secondary: #00A3FF;
-  --axiom-emerald: #34d399;
+  --axiom-accent: #D4AF37;
+  --axiom-accent-hover: #FFD700;
+  --axiom-accent-deep: #A67C00;
+  --axiom-accent-soft: rgba(212, 175, 55, 0.14);
+  --axiom-secondary: #A67C00;
+  --axiom-emerald: #15803d;
 
-  --axiom-text-primary: #FFFFFF;
-  --axiom-text-secondary: #A8B8CC;
-  --axiom-text-muted: #7B90AB;
+  --axiom-text-primary: #171717;
+  --axiom-text-secondary: #666666;
+  --axiom-text-muted: #666666;
 
-  --axiom-shadow-card: 0 12px 32px -12px rgba(3, 9, 20, 0.78);
-  --axiom-shadow-elevated: 0 20px 48px -16px rgba(3, 9, 20, 0.9);
+  --axiom-shadow-card: 0 12px 32px -14px rgba(166, 124, 0, 0.14), 0 2px 8px -2px rgba(23, 23, 23, 0.04);
+  --axiom-shadow-elevated: 0 24px 52px -16px rgba(166, 124, 0, 0.22), 0 4px 16px -4px rgba(23, 23, 23, 0.06);
   --axiom-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -56,27 +57,27 @@
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid rgba(0, 163, 255, 0.75);
+    outline: 2px solid rgba(212, 175, 55, 0.85);
     outline-offset: 2px;
   }
 }
 
-/* Deep Navy atmospheric canvas with subtle Electric Blue & Bright Blue glow and dot-grid */
+/* Pure White & Champagne atmospheric canvas with subtle Mirror Gold glow and dot-grid */
 .axiom-canvas-bg {
   background-color: var(--axiom-bg-canvas);
   background-image:
-    radial-gradient(60% 45% at 88% 0%, rgba(0, 102, 255, 0.14) 0%, transparent 70%),
-    radial-gradient(50% 45% at 10% 95%, rgba(0, 163, 255, 0.09) 0%, transparent 70%),
-    radial-gradient(rgba(29, 53, 85, 0.55) 1px, transparent 1px);
+    radial-gradient(60% 45% at 88% 0%, rgba(255, 215, 0, 0.10) 0%, transparent 70%),
+    radial-gradient(50% 45% at 10% 95%, rgba(212, 175, 55, 0.09) 0%, transparent 70%),
+    radial-gradient(rgba(212, 175, 55, 0.24) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 28px 28px;
   background-position: 0 0, 0 0, 0 0;
 }
 
 /* Primary single-elevation card surface */
 .axiom-card {
-  background: linear-gradient(180deg, #101F35 0%, #0D1B2F 100%);
-  border: 1px solid var(--axiom-border-subtle);
-  box-shadow: var(--axiom-shadow-card);
+  background: linear-gradient(165deg, #FFFFFF 0%, #FFFDF5 65%, #FAFAFA 100%);
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  box-shadow: var(--axiom-shadow-card), inset 0 1px 0 #FFFFFF;
   backdrop-filter: blur(12px);
   transition:
     border-color 180ms var(--axiom-ease-out),
@@ -87,21 +88,21 @@
 
 .axiom-card-interactive:hover {
   border-color: var(--axiom-border-accent);
-  background: linear-gradient(180deg, #132640 0%, #101F35 100%);
+  background: linear-gradient(165deg, #FFFFFF 0%, #FFFDF5 55%, rgba(247, 231, 176, 0.35) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 18px 36px -14px rgba(0, 102, 255, 0.25);
+  box-shadow: 0 18px 36px -14px rgba(212, 175, 55, 0.28), inset 0 1px 0 #FFFFFF;
 }
 
 /* Inset panel surface */
 .axiom-inset {
-  background-color: var(--axiom-bg-inset);
-  border: 1px solid var(--axiom-border-subtle);
+  background-color: #FFFDF5;
+  border: 1px solid #F7E7B0;
 }
 
 /* Unified form input */
 .axiom-input {
-  background-color: var(--axiom-bg-inset);
-  border: 1px solid var(--axiom-border-default);
+  background-color: #FFFFFF;
+  border: 1px solid rgba(212, 175, 55, 0.38);
   color: var(--axiom-text-primary);
   transition:
     border-color 160ms var(--axiom-ease-out),
@@ -110,25 +111,30 @@
 }
 
 .axiom-input::placeholder {
-  color: var(--axiom-text-muted);
+  color: rgba(102, 102, 102, 0.72);
 }
 
 .axiom-input:hover {
-  border-color: #2A4B75;
+  border-color: #D4AF37;
 }
 
 .axiom-input:focus {
   outline: none;
-  border-color: var(--axiom-secondary);
-  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.24);
+  background-color: #FFFDF5;
+  border-color: #A67C00;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.28);
 }
 
 /* Button primitives */
 .axiom-btn-primary {
-  background: linear-gradient(135deg, #0066FF 0%, #00A3FF 100%);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #D4AF37 0%, #FFD700 28%, #FFF4B0 50%, #F7E7B0 68%, #D4AF37 88%, #A67C00 100%);
+  color: #171717;
   font-weight: 700;
-  box-shadow: 0 8px 20px -6px rgba(0, 102, 255, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(166, 124, 0, 0.55);
+  box-shadow:
+    0 8px 20px -6px rgba(166, 124, 0, 0.36),
+    inset 0 1px 1px rgba(255, 255, 255, 0.85),
+    inset 0 -1px 1px rgba(166, 124, 0, 0.22);
   transition:
     transform 150ms var(--axiom-ease-out),
     box-shadow 180ms var(--axiom-ease-out),
@@ -136,8 +142,11 @@
 }
 
 .axiom-btn-primary:hover {
-  filter: brightness(1.08);
-  box-shadow: 0 12px 26px -6px rgba(0, 163, 255, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+  filter: brightness(1.04);
+  box-shadow:
+    0 12px 26px -6px rgba(212, 175, 55, 0.48),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(166, 124, 0, 0.28);
   transform: translateY(-1px);
 }
 
@@ -146,21 +155,24 @@
 }
 
 .axiom-btn-secondary {
-  background-color: #0B172A;
-  border: 1px solid #1D3555;
-  color: #FFFFFF;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF5 100%);
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  color: #171717;
   font-weight: 600;
+  box-shadow: 0 2px 8px -2px rgba(166, 124, 0, 0.12), inset 0 1px 0 #FFFFFF;
   transition:
-    background-color 160ms var(--axiom-ease-out),
+    background 160ms var(--axiom-ease-out),
     border-color 160ms var(--axiom-ease-out),
     color 160ms var(--axiom-ease-out),
+    box-shadow 160ms var(--axiom-ease-out),
     transform 150ms var(--axiom-ease-out);
 }
 
 .axiom-btn-secondary:hover {
-  background-color: #101F35;
-  border-color: #00A3FF;
-  color: #FFFFFF;
+  background: linear-gradient(180deg, #FFFDF5 0%, rgba(247, 231, 176, 0.55) 100%);
+  border-color: #A67C00;
+  color: #171717;
+  box-shadow: 0 6px 16px -4px rgba(212, 175, 55, 0.24), inset 0 1px 0 #FFFFFF;
   transform: translateY(-1px);
 }
 
@@ -170,9 +182,9 @@
 
 /* Modal panel surface */
 .axiom-modal-panel {
-  background: linear-gradient(180deg, #101F35 0%, #0B172A 100%);
-  border: 1px solid #1D3555;
-  box-shadow: var(--axiom-shadow-elevated);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF5 100%);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow: var(--axiom-shadow-elevated), inset 0 1px 0 #FFFFFF;
 }
 
 /* Tabular figures helper */
@@ -186,14 +198,14 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #07111F;
+  background: #FAFAFA;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1D3555;
+  background: #F7E7B0;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0066FF;
+  background: #D4AF37;
 }
 
 /* Accessibility: respect reduced motion preferences */

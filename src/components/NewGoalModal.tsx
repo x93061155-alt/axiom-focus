@@ -53,29 +53,29 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
   };
 
   return (
-    <div id="new-goal-modal-backdrop" className="fixed inset-0 bg-[#07111F]/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div id="new-goal-modal-backdrop" className="fixed inset-0 bg-[#171717]/30 backdrop-blur-md z-50 flex items-center justify-center p-4">
       <div 
         id="new-goal-modal-content" 
         className="w-full max-w-xl axiom-modal-panel rounded-2xl p-6 md:p-7 relative overflow-hidden"
       >
-        <div className="absolute top-0 right-0 w-40 h-40 bg-[#0066FF]/12 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-40 h-40 bg-[#FFD700]/15 rounded-full blur-3xl pointer-events-none" />
 
         {/* Modal Header */}
-        <div className="flex justify-between items-center mb-6 border-b border-[#1D3555] pb-4 relative z-10">
+        <div className="flex justify-between items-center mb-6 border-b border-[#F7E7B0] pb-4 relative z-10">
           <div className="flex items-center gap-3">
-            <div className="text-[#00A3FF] bg-[#0066FF]/15 border border-[#00A3FF]/30 p-2 rounded-xl">
+            <div className="text-[#A67C00] bg-gradient-to-br from-[#FFFDF5] to-[#F7E7B0]/65 border border-[#D4AF37]/50 p-2 rounded-xl shadow-sm">
               <Target size={18} />
             </div>
             <div>
-              <h3 className="text-lg font-bold font-display text-[#FFFFFF]">Create Strategic Node</h3>
-              <span className="text-xs text-[#A8B8CC] block mt-0.5">Axiom Goal Architecture</span>
+              <h3 className="text-lg font-bold font-display text-[#171717]">Create Strategic Node</h3>
+              <span className="text-xs text-[#666666] block mt-0.5">Axiom Goal Architecture</span>
             </div>
           </div>
           
           <button 
             onClick={onClose}
             aria-label="Close modal"
-            className="p-2 rounded-lg text-[#A8B8CC] hover:text-[#FFFFFF] hover:bg-[#101F35] transition-colors cursor-pointer"
+            className="p-2 rounded-lg text-[#666666] hover:text-[#171717] hover:bg-[#FFFDF5] transition-colors cursor-pointer"
           >
             <X size={18} />
           </button>
@@ -84,7 +84,7 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
           <div>
-            <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Project Name</label>
+            <label className="text-xs font-medium text-[#666666] block mb-1.5">Project Name</label>
             <input
               type="text"
               placeholder="e.g. Project Axiom, Fitness Tracker, Self Care"
@@ -95,7 +95,7 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
           </div>
 
           <div>
-            <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Objective Title</label>
+            <label className="text-xs font-medium text-[#666666] block mb-1.5">Objective Title</label>
             <input
               type="text"
               required
@@ -107,7 +107,7 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
           </div>
 
           <div>
-            <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Description & Outcome Metrics</label>
+            <label className="text-xs font-medium text-[#666666] block mb-1.5">Description & Outcome Metrics</label>
             <textarea
               placeholder="Define measurable targets and desired outcomes..."
               rows={2}
@@ -119,7 +119,7 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Blueprint Category</label>
+              <label className="text-xs font-medium text-[#666666] block mb-1.5">Blueprint Category</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value as GoalCategory)}
@@ -134,7 +134,7 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
             </div>
 
             <div>
-              <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Target Completion Date</label>
+              <label className="text-xs font-medium text-[#666666] block mb-1.5">Target Completion Date</label>
               <input
                 type="date"
                 value={dueDate}
@@ -145,10 +145,10 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
           </div>
 
           <div>
-            <label className="text-xs font-medium text-[#A8B8CC] block mb-1">
+            <label className="text-xs font-medium text-[#666666] block mb-1">
               Initial Milestones (Optional)
             </label>
-            <span className="text-[11px] text-[#A8B8CC]/80 block mb-1.5 leading-snug">
+            <span className="text-[11px] text-[#666666]/85 block mb-1.5 leading-snug">
               Separate tasks with a comma or newline. You can refine them later in Planning & Tasks.
             </span>
             <textarea
@@ -160,7 +160,7 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-[#1D3555]">
+          <div className="flex justify-end gap-3 pt-4 border-t border-[#F7E7B0]">
             <button
               type="button"
               onClick={onClose}

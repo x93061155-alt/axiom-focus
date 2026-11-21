@@ -56,14 +56,14 @@ export default function Sidebar({
       {/* Mobile Backdrop Overlay */}
       {isMobileOpen && (
         <div 
-          className="md:hidden fixed inset-0 bg-[#07111F]/80 backdrop-blur-sm z-30 transition-opacity"
+          className="md:hidden fixed inset-0 bg-[#171717]/25 backdrop-blur-sm z-30 transition-opacity"
           onClick={onCloseMobile}
         />
       )}
 
       <aside 
         id="sidebar-container" 
-        className={`fixed md:static inset-y-0 left-0 z-40 w-64 bg-[#0B172A]/95 backdrop-blur-xl text-[#A8B8CC] border-r border-[#1D3555] flex flex-col h-full justify-between select-none transition-transform duration-300 ease-out ${
+        className={`fixed md:static inset-y-0 left-0 z-40 w-64 bg-[#FFFFFF]/95 backdrop-blur-xl text-[#666666] border-r border-[#F7E7B0] shadow-[4px_0_24px_-12px_rgba(166,124,0,0.12)] flex flex-col h-full justify-between select-none transition-transform duration-300 ease-out ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
@@ -78,23 +78,23 @@ export default function Sidebar({
                 if (onCloseMobile) onCloseMobile();
               }}
             >
-              <div className="w-10 h-10 bg-[#101F35] rounded-xl flex items-center justify-center border border-[#1D3555] relative overflow-hidden shadow-lg group-hover:border-[#00A3FF] transition-colors">
-                <svg viewBox="0 0 100 100" className="w-6 h-6 text-[#00A3FF] stroke-current fill-none transition-transform duration-200 group-hover:scale-105" strokeWidth="6">
+              <div className="w-10 h-10 bg-gradient-to-br from-[#FFFDF5] via-[#FFF4B0]/55 to-[#F7E7B0]/65 rounded-xl flex items-center justify-center border border-[#D4AF37]/60 relative overflow-hidden shadow-[0_4px_14px_-4px_rgba(166,124,0,0.28)] group-hover:border-[#A67C00] transition-colors">
+                <svg viewBox="0 0 100 100" className="w-6 h-6 text-[#A67C00] stroke-current fill-none transition-transform duration-200 group-hover:scale-105" strokeWidth="6">
                   <circle cx="50" cy="50" r="40" stroke="currentColor" />
                   <circle cx="50" cy="50" r="25" stroke="currentColor" strokeWidth="4" />
                   <circle cx="50" cy="50" r="10" fill="currentColor" />
                 </svg>
               </div>
               <div className="min-w-0">
-                <h1 className="text-lg font-bold font-display text-[#FFFFFF] leading-none tracking-tight whitespace-nowrap">Axiom Focus</h1>
-                <span className="text-[11px] text-[#A8B8CC] font-medium block mt-1 whitespace-nowrap">Peak Performance</span>
+                <h1 className="text-lg font-bold font-display text-[#171717] leading-none tracking-tight whitespace-nowrap">Axiom Focus</h1>
+                <span className="text-[11px] text-[#666666] font-medium block mt-1 whitespace-nowrap">Peak Performance</span>
               </div>
             </div>
 
             {onCloseMobile && (
               <button
                 onClick={onCloseMobile}
-                className="md:hidden p-1.5 text-[#A8B8CC] hover:text-[#FFFFFF] rounded-lg hover:bg-[#101F35] transition-colors cursor-pointer"
+                className="md:hidden p-1.5 text-[#666666] hover:text-[#171717] rounded-lg hover:bg-[#FFFDF5] transition-colors cursor-pointer"
                 title="Close sidebar menu"
                 aria-label="Close sidebar menu"
               >
@@ -125,11 +125,11 @@ export default function Sidebar({
                   onClick={() => setActiveTab(item.id)}
                   className={`w-full py-2.5 px-3.5 rounded-xl text-sm font-medium flex items-center gap-3 transition-all duration-150 text-left cursor-pointer border whitespace-nowrap ${
                     isActive
-                      ? 'bg-[#0066FF]/18 text-[#FFFFFF] border-[#00A3FF]/40 shadow-sm'
-                      : 'border-transparent text-[#A8B8CC] hover:text-[#FFFFFF] hover:bg-[#101F35]'
+                      ? 'bg-gradient-to-r from-[#FFF4B0]/55 via-[#F7E7B0]/45 to-[#FFFDF5] text-[#171717] font-semibold border-[#D4AF37]/75 shadow-[0_4px_14px_-6px_rgba(166,124,0,0.22)]'
+                      : 'border-transparent text-[#666666] hover:text-[#171717] hover:bg-[#FFFDF5]'
                   }`}
                 >
-                  <Icon size={17} className={isActive ? 'text-[#00A3FF] shrink-0' : 'text-[#A8B8CC]/80 shrink-0'} />
+                  <Icon size={17} className={isActive ? 'text-[#A67C00] shrink-0' : 'text-[#666666] shrink-0'} />
                   <span className="truncate">{item.name}</span>
                 </button>
               );
@@ -138,26 +138,26 @@ export default function Sidebar({
         </div>
 
         {/* Footer Profile / Help */}
-        <div id="sidebar-footer" className="p-4 border-t border-[#1D3555] flex flex-col gap-3 bg-[#07111F]/90">
+        <div id="sidebar-footer" className="p-4 border-t border-[#F7E7B0] flex flex-col gap-3 bg-[#FAFAFA]/90">
           {/* Help Center */}
           <button
             id="btn-help-center"
             onClick={onOpenHelpCenter}
-            className="flex items-center gap-3 px-3 py-2 text-xs font-medium text-[#A8B8CC] hover:text-[#FFFFFF] hover:bg-[#101F35] rounded-lg transition-colors w-full text-left cursor-pointer"
+            className="flex items-center gap-3 px-3 py-2 text-xs font-medium text-[#666666] hover:text-[#171717] hover:bg-[#FFFDF5] rounded-lg transition-colors w-full text-left cursor-pointer"
           >
-            <HelpCircle size={15} className="text-[#00A3FF] shrink-0" />
+            <HelpCircle size={15} className="text-[#A67C00] shrink-0" />
             <span>Help Center</span>
           </button>
 
           {/* User Block */}
-          <div id="user-profile-block" className="flex items-center justify-between bg-[#101F35] p-2.5 rounded-xl border border-[#1D3555]">
+          <div id="user-profile-block" className="flex items-center justify-between bg-[#FFFDF5] p-2.5 rounded-xl border border-[#F7E7B0] shadow-[0_2px_10px_-4px_rgba(166,124,0,0.12)]">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-9 h-9 rounded-lg overflow-hidden border border-[#1D3555] bg-[#0B172A] p-0.5 shrink-0" dangerouslySetInnerHTML={{ __html: currentAvatar.svg }} />
+              <div className="w-9 h-9 rounded-lg overflow-hidden border border-[#D4AF37]/45 bg-[#FFFFFF] p-0.5 shrink-0" dangerouslySetInnerHTML={{ __html: currentAvatar.svg }} />
               <div className="flex flex-col min-w-0">
-                <span className="text-xs font-semibold text-[#FFFFFF] leading-tight truncate">
+                <span className="text-xs font-semibold text-[#171717] leading-tight truncate">
                   {profile.firstName || 'User'}
                 </span>
-                <span className="text-[11px] text-[#A8B8CC] truncate">{profile.email}</span>
+                <span className="text-[11px] text-[#666666] truncate">{profile.email}</span>
               </div>
             </div>
             <button
@@ -165,7 +165,7 @@ export default function Sidebar({
               onClick={onLogout}
               title="Reset Session / Sign out"
               aria-label="Sign out"
-              className="p-2 text-[#A8B8CC] hover:text-rose-400 rounded-lg hover:bg-rose-500/10 transition-colors cursor-pointer shrink-0"
+              className="p-2 text-[#666666] hover:text-rose-700 rounded-lg hover:bg-rose-50 transition-colors cursor-pointer shrink-0"
             >
               <LogOut size={15} />
             </button>

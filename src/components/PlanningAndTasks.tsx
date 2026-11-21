@@ -73,32 +73,32 @@ export default function PlanningAndTasks({
   const getCategoryTextColor = (category: GoalCategory) => {
     switch (category) {
       case 'PERSONAL':
-        return 'text-[#00A3FF]';
+        return 'text-[#A67C00]';
       case 'FITNESS':
-        return 'text-sky-400';
+        return 'text-emerald-700';
       case 'BUSINESS':
-        return 'text-indigo-400';
+        return 'text-[#171717]';
       case 'ACADEMIC':
-        return 'text-emerald-400';
+        return 'text-amber-700';
       case 'LIFESTYLE':
-        return 'text-rose-400';
+        return 'text-rose-700';
     }
   };
 
   return (
-    <div id="planning-tab" className="flex-1 overflow-y-auto text-[#FFFFFF] p-5 sm:p-8 md:p-10 flex flex-col justify-between min-h-full">
+    <div id="planning-tab" className="flex-1 overflow-y-auto text-[#171717] p-5 sm:p-8 md:p-10 flex flex-col justify-between min-h-full">
       <div className="max-w-6xl w-full mx-auto">
         {/* Title & Filter Toolbar */}
-        <div className="mb-8 flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#1D3555] pb-6">
+        <div className="mb-8 flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#F7E7B0] pb-6">
           <div>
-            <span className="text-xs font-medium text-[#00A3FF] block mb-1">Execution Blueprint</span>
-            <h2 className="text-3xl md:text-4xl font-bold font-display leading-tight text-[#FFFFFF]">Planning & Tasks</h2>
-            <p className="text-sm text-[#A8B8CC] mt-1.5">Organize and execute your strategic milestones</p>
+            <span className="text-xs font-semibold text-[#A67C00] block mb-1">Execution Blueprint</span>
+            <h2 className="text-3xl md:text-4xl font-bold font-display leading-tight text-[#171717]">Planning & Tasks</h2>
+            <p className="text-sm text-[#666666] mt-1.5">Organize and execute your strategic milestones</p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
             <div className="relative w-full sm:w-64">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-[#A8B8CC]">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-[#A67C00]">
                 <Search size={14} />
               </span>
               <input
@@ -130,16 +130,16 @@ export default function PlanningAndTasks({
           
           {/* Left Column: Active Plans List */}
           <div className="lg:col-span-5 axiom-card rounded-2xl p-5">
-            <div className="flex justify-between items-center mb-4 pb-3 border-b border-[#1D3555]">
-              <h3 className="text-sm font-semibold text-[#FFFFFF]">Active Plans</h3>
-              <span className="text-xs font-mono tabular-nums text-[#00A3FF]">
+            <div className="flex justify-between items-center mb-4 pb-3 border-b border-[#F7E7B0]">
+              <h3 className="text-sm font-semibold text-[#171717]">Active Plans</h3>
+              <span className="text-xs font-mono tabular-nums text-[#A67C00] font-semibold">
                 {filteredGoals.length} {filteredGoals.length === 1 ? 'plan' : 'plans'}
               </span>
             </div>
 
             <div className="flex flex-col gap-2.5 max-h-[520px] overflow-y-auto pr-1">
               {filteredGoals.length === 0 ? (
-                <div className="text-center py-12 text-[#A8B8CC] text-xs">
+                <div className="text-center py-12 text-[#666666] text-xs">
                   No active blueprints found matching your query.
                 </div>
               ) : (
@@ -156,14 +156,14 @@ export default function PlanningAndTasks({
                       onClick={() => setSelectedGoalId(g.id)}
                       className={`p-4 rounded-xl border text-left cursor-pointer transition-all duration-150 w-full ${
                         isActive
-                          ? 'bg-[#0066FF]/18 border-[#00A3FF]/50 shadow-sm'
-                          : 'bg-[#0B172A] border-[#1D3555] hover:bg-[#101F35] hover:border-[#00A3FF]/40'
+                          ? 'bg-gradient-to-r from-[#FFF4B0]/55 via-[#F7E7B0]/40 to-[#FFFDF5] border-[#D4AF37] shadow-sm'
+                          : 'bg-[#FFFFFF] border-[#F7E7B0] hover:bg-[#FFFDF5] hover:border-[#D4AF37]/65'
                       }`}
                     >
                       <div className="flex justify-between items-start gap-2 mb-2">
                         <div className="min-w-0">
-                          <h4 className={`text-sm font-semibold truncate ${isActive ? 'text-[#00A3FF]' : 'text-[#FFFFFF]'}`}>{g.title}</h4>
-                          <span className="text-[11px] text-[#A8B8CC] font-mono tabular-nums mt-0.5 block">
+                          <h4 className={`text-sm font-semibold truncate ${isActive ? 'text-[#A67C00]' : 'text-[#171717]'}`}>{g.title}</h4>
+                          <span className="text-[11px] text-[#666666] font-mono tabular-nums mt-0.5 block">
                             Due {g.dueDate ? new Date(g.dueDate).toLocaleDateString() : 'No date'}
                           </span>
                         </div>
@@ -172,13 +172,13 @@ export default function PlanningAndTasks({
                         </span>
                       </div>
 
-                      <div className="flex items-center justify-between text-[11px] font-mono tabular-nums text-[#A8B8CC] mb-1.5 mt-3">
+                      <div className="flex items-center justify-between text-[11px] font-mono tabular-nums text-[#666666] mb-1.5 mt-3">
                         <span>{completedTasks}/{totalTasks} tasks</span>
-                        <span className="text-[#00A3FF] font-semibold">{progress}%</span>
+                        <span className="text-[#A67C00] font-semibold">{progress}%</span>
                       </div>
-                      <div className="w-full bg-[#07111F] h-1.5 rounded-full overflow-hidden border border-[#1D3555]">
+                      <div className="w-full bg-[#FAFAFA] h-1.5 rounded-full overflow-hidden border border-[#F7E7B0]">
                         <div
-                          className="bg-gradient-to-r from-[#0066FF] to-[#00A3FF] h-full rounded-full transition-all duration-300"
+                          className="bg-gradient-to-r from-[#A67C00] via-[#D4AF37] to-[#FFD700] h-full rounded-full transition-all duration-300"
                           style={{ width: `${progress}%` }}
                         />
                       </div>
@@ -193,16 +193,16 @@ export default function PlanningAndTasks({
           <div className="lg:col-span-7 axiom-card rounded-2xl p-6 min-h-[460px] flex flex-col justify-between">
             {selectedGoal ? (
               <div>
-                <div className="mb-6 border-b border-[#1D3555] pb-5">
+                <div className="mb-6 border-b border-[#F7E7B0] pb-5">
                   <div className="flex justify-between items-start gap-4 mb-1.5">
-                    <h3 className="text-xl font-bold text-[#FFFFFF] font-display">{selectedGoal.title}</h3>
-                    <span className="text-xl font-mono tabular-nums text-[#00A3FF] font-bold shrink-0">
+                    <h3 className="text-xl font-bold text-[#171717] font-display">{selectedGoal.title}</h3>
+                    <span className="text-xl font-mono tabular-nums text-[#A67C00] font-bold shrink-0">
                       {selectedGoal.tasks.length > 0
                         ? `${Math.round((selectedGoal.tasks.filter(t => t.isCompleted).length / selectedGoal.tasks.length) * 100)}%`
                         : (selectedGoal.status === 'DONE' ? '100%' : '0%')}
                     </span>
                   </div>
-                  <p className="text-xs text-[#A8B8CC] leading-relaxed">{selectedGoal.description || 'No description provided.'}</p>
+                  <p className="text-xs text-[#666666] leading-relaxed">{selectedGoal.description || 'No description provided.'}</p>
                 </div>
 
                 {/* Task Creation Form */}
@@ -226,14 +226,14 @@ export default function PlanningAndTasks({
 
                 {/* Tasks Header */}
                 <div className="flex justify-between items-center mb-3.5">
-                  <h4 className="text-xs font-semibold text-[#FFFFFF]">Tasks & Milestones</h4>
-                  <span className="text-xs text-[#A8B8CC]">Drag to reorder</span>
+                  <h4 className="text-xs font-semibold text-[#171717]">Tasks & Milestones</h4>
+                  <span className="text-xs text-[#666666]">Drag to reorder</span>
                 </div>
 
                 {/* Task List */}
                 <div className="flex flex-col gap-2 max-h-[320px] overflow-y-auto pr-1">
                   {selectedGoal.tasks.length === 0 ? (
-                    <div className="border border-dashed border-[#1D3555] rounded-xl p-12 text-center text-[#A8B8CC] text-xs my-2">
+                    <div className="border border-dashed border-[#D4AF37]/45 rounded-xl p-12 text-center text-[#666666] text-xs my-2 bg-[#FFFDF5]/60">
                       No tasks created for this plan yet. Add your first milestone above.
                     </div>
                   ) : (
@@ -244,18 +244,18 @@ export default function PlanningAndTasks({
                         onDragStart={(e) => handleDragStart(e, idx)}
                         onDragOver={handleDragOver}
                         onDrop={(e) => handleDrop(e, idx)}
-                        className="axiom-inset rounded-xl p-3 flex items-center justify-between group hover:border-[#00A3FF]/40 transition-all duration-150 cursor-grab active:cursor-grabbing"
+                        className="axiom-inset rounded-xl p-3 flex items-center justify-between group hover:border-[#D4AF37] transition-all duration-150 cursor-grab active:cursor-grabbing"
                       >
                         <div className="flex items-center gap-2.5 flex-1 min-w-0">
-                          <GripVertical size={14} className="text-[#1D3555] group-hover:text-[#A8B8CC] cursor-grab flex-shrink-0" />
+                          <GripVertical size={14} className="text-[#D4AF37]/60 group-hover:text-[#A67C00] cursor-grab flex-shrink-0" />
                           <button
                             type="button"
                             onClick={() => onToggleTask(selectedGoal.id, task.id)}
                             aria-label={task.isCompleted ? 'Mark task incomplete' : 'Mark task complete'}
                             className={`p-0.5 rounded-md transition-colors cursor-pointer ${
                               task.isCompleted
-                                ? 'text-emerald-400'
-                                : 'text-[#A8B8CC] hover:text-[#00A3FF]'
+                                ? 'text-emerald-700'
+                                : 'text-[#666666] hover:text-[#A67C00]'
                             }`}
                           >
                             {task.isCompleted ? <CheckSquare size={18} /> : <Square size={18} />}
@@ -263,8 +263,8 @@ export default function PlanningAndTasks({
                           <span
                             className={`text-sm truncate transition-all ${
                               task.isCompleted
-                                ? 'line-through text-[#A8B8CC]/60'
-                                : 'text-[#FFFFFF] font-medium'
+                                ? 'line-through text-[#666666]/65'
+                                : 'text-[#171717] font-medium'
                             }`}
                           >
                             {task.title}
@@ -274,7 +274,7 @@ export default function PlanningAndTasks({
                         <button
                           type="button"
                           onClick={() => onDeleteTask(selectedGoal.id, task.id)}
-                          className="text-[#A8B8CC] hover:text-rose-400 opacity-70 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg hover:bg-rose-500/10 transition-all cursor-pointer"
+                          className="text-[#666666] hover:text-rose-700 opacity-70 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg hover:bg-rose-50 transition-all cursor-pointer"
                           title="Delete Milestone"
                           aria-label="Delete Milestone"
                         >
@@ -286,10 +286,10 @@ export default function PlanningAndTasks({
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-center text-[#A8B8CC] py-14">
-                <Layers size={40} className="text-[#1D3555] mb-3" />
-                <p className="text-sm font-medium text-[#FFFFFF]">Select an active plan</p>
-                <p className="text-xs text-[#A8B8CC] mt-1">Choose a goal from the left panel to map and reorder milestones.</p>
+              <div className="flex flex-col items-center justify-center h-full text-center text-[#666666] py-14">
+                <Layers size={40} className="text-[#D4AF37] mb-3" />
+                <p className="text-sm font-medium text-[#171717]">Select an active plan</p>
+                <p className="text-xs text-[#666666] mt-1">Choose a goal from the left panel to map and reorder milestones.</p>
               </div>
             )}
           </div>

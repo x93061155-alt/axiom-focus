@@ -601,16 +601,16 @@ export default function App() {
   // Global Auth Loading Gate
   if (!authInitialized) {
     return (
-      <div id="axiom-loader-gate" className="fixed inset-0 flex items-center justify-center axiom-canvas-bg text-[#FFFFFF]">
+      <div id="axiom-loader-gate" className="fixed inset-0 flex items-center justify-center axiom-canvas-bg text-[#171717]">
         <div className="flex flex-col items-center gap-4">
           <div className="relative flex items-center justify-center w-14 h-14">
-            <div className="absolute inset-0 rounded-full bg-[#0066FF]/20 blur-xl" />
-            <svg viewBox="0 0 100 100" className="w-12 h-12 text-[#00A3FF] stroke-current fill-none animate-spin" strokeWidth="6">
-              <circle cx="50" cy="50" r="40" stroke="currentColor" strokeOpacity="0.2" />
+            <div className="absolute inset-0 rounded-full bg-[#FFD700]/25 blur-xl" />
+            <svg viewBox="0 0 100 100" className="w-12 h-12 text-[#D4AF37] stroke-current fill-none animate-spin" strokeWidth="6">
+              <circle cx="50" cy="50" r="40" stroke="currentColor" strokeOpacity="0.25" />
               <circle cx="50" cy="50" r="40" stroke="currentColor" strokeDasharray="160 90" strokeLinecap="round" />
             </svg>
           </div>
-          <span className="text-xs font-medium tracking-wide text-[#A8B8CC]">Initializing workspace...</span>
+          <span className="text-xs font-medium tracking-wide text-[#666666]">Initializing workspace...</span>
         </div>
       </div>
     );
@@ -627,25 +627,25 @@ export default function App() {
   }
 
   return (
-    <div id="axiom-app-root" className="flex flex-col md:flex-row h-screen w-screen overflow-hidden axiom-canvas-bg font-sans antialiased text-[#FFFFFF]">
+    <div id="axiom-app-root" className="flex flex-col md:flex-row h-screen w-screen overflow-hidden axiom-canvas-bg font-sans antialiased text-[#171717]">
       {/* Mobile Top Header Bar */}
-      <header id="mobile-top-header" className="md:hidden flex items-center justify-between bg-[#0B172A]/95 backdrop-blur-md border-b border-[#1D3555] px-4 py-2.5 h-14 z-20 shrink-0">
+      <header id="mobile-top-header" className="md:hidden flex items-center justify-between bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#F7E7B0] px-4 py-2.5 h-14 z-20 shrink-0 shadow-[0_2px_12px_-4px_rgba(166,124,0,0.12)]">
         <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => setActiveTab(isAdminUser ? 'admin' : 'overview')}>
-          <div className="w-8 h-8 bg-[#101F35] rounded-lg flex items-center justify-center border border-[#1D3555] relative overflow-hidden shadow-md">
-            <svg viewBox="0 0 100 100" className="w-5 h-5 text-[#00A3FF] stroke-current fill-none" strokeWidth="6">
+          <div className="w-8 h-8 bg-gradient-to-br from-[#FFFDF5] to-[#F7E7B0]/55 rounded-lg flex items-center justify-center border border-[#D4AF37]/60 relative overflow-hidden shadow-sm">
+            <svg viewBox="0 0 100 100" className="w-5 h-5 text-[#A67C00] stroke-current fill-none" strokeWidth="6">
               <circle cx="50" cy="50" r="40" stroke="currentColor" />
               <circle cx="50" cy="50" r="25" stroke="currentColor" strokeWidth="4" />
               <circle cx="50" cy="50" r="10" fill="currentColor" />
             </svg>
           </div>
-          <span className="text-sm font-bold font-display text-[#FFFFFF] tracking-tight whitespace-nowrap">Axiom Focus</span>
+          <span className="text-sm font-bold font-display text-[#171717] tracking-tight whitespace-nowrap">Axiom Focus</span>
         </div>
         
         {/* Mobile menu trigger */}
         <button 
           id="mobile-menu-trigger"
           onClick={() => setIsMobileMenuOpen(true)}
-          className="p-2 text-[#A8B8CC] hover:text-[#FFFFFF] rounded-lg hover:bg-[#101F35] transition-colors cursor-pointer"
+          className="p-2 text-[#666666] hover:text-[#171717] rounded-lg hover:bg-[#FFFDF5] transition-colors cursor-pointer"
           title="Open menu"
           aria-label="Open navigation menu"
         >
