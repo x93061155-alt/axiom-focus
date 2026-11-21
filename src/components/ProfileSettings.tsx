@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, ShieldAlert, Sparkles, AlertCircle, Check } from 'lucide-react';
+import { AlertCircle, Check } from 'lucide-react';
 import { UserProfile } from '../types';
 import { AVATARS } from '../constants';
 import Footer from './Footer';
@@ -41,108 +41,108 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
   const selectedAvatarData = AVATARS.find((a) => a.id === avatar) || AVATARS[0];
 
   return (
-    <div id="settings-tab" className="flex-1 overflow-y-auto bg-[#071324] text-white p-4 sm:p-6 md:p-10 flex flex-col justify-between min-h-screen">
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div id="settings-tab" className="flex-1 overflow-y-auto text-[#FFFFFF] p-5 sm:p-8 md:p-10 flex flex-col justify-between min-h-full">
+      <form onSubmit={handleSubmit} className="space-y-7 max-w-6xl w-full mx-auto">
         
-        {/* Header Title & Action buttons matching Screenshot 3 */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#12243d] pb-6">
+        {/* Header Title & Action buttons */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#1D3555] pb-6">
           <div>
-            <h2 className="text-2xl md:text-4xl font-extrabold font-display leading-tight">Profile & Settings</h2>
-            <p className="text-xs text-gray-400 mt-1">
-              Manage your architectural clarity. Update your identity, configure your focus notifications, and maintain your system preferences.
+            <span className="text-xs font-medium text-[#00A3FF] block mb-1">Workspace Preferences</span>
+            <h2 className="text-3xl md:text-4xl font-bold font-display leading-tight text-[#FFFFFF]">Profile & Settings</h2>
+            <p className="text-sm text-[#A8B8CC] mt-1.5 max-w-2xl">
+              Manage your identity, configure your focus notifications, and maintain your system preferences.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 border border-[#1a2c42] rounded-xl text-xs font-bold text-gray-400 hover:text-white hover:bg-[#10243d] transition-colors"
+              className="px-4 py-2.5 axiom-btn-secondary rounded-xl text-xs cursor-pointer"
             >
-              CANCEL
+              Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2.5 bg-[#e0a96d] hover:bg-[#f3bf84] text-[#071324] font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all duration-200 active:scale-95 shadow-md shadow-[#e0a96d]/10"
+              className="px-5 py-2.5 axiom-btn-primary text-xs rounded-xl flex items-center justify-center gap-1.5 cursor-pointer"
             >
-              SAVE CHANGES
+              Save Changes
             </button>
           </div>
         </div>
 
-        {/* Somali quote banner exactly as displayed in yellow-gold in Screenshot 3 */}
-        <div className="bg-[#0b1d31] border-2 border-dashed border-[#e0a96d]/30 rounded-2xl p-6 text-center shadow-lg relative overflow-hidden group">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#e0a96d]/5 rounded-full blur-2xl pointer-events-none" />
-          <p className="text-sm md:text-base font-semibold font-display text-[#e0a96d] italic leading-relaxed max-w-4xl mx-auto z-10 relative">
+        {/* Somali quote banner */}
+        <div className="axiom-card border-[#00A3FF]/30 rounded-2xl p-6 text-center relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-[#0066FF]/12 rounded-full blur-3xl pointer-events-none" />
+          <p className="text-sm md:text-base font-semibold font-display text-[#00A3FF] italic leading-relaxed max-w-4xl mx-auto z-10 relative">
             "wali dhismo ayaa ku socda wepsite kaan, mahadsanid sida quruxda badan aad uso boqatey wepkayga"
           </p>
-          <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest block mt-2 z-10 relative">
-            AXIOM SYSTEM NOTIFICATION • TRANSLATION: DEVELOPMENT ACTIVE • THANK YOU FOR VISITING
+          <span className="text-xs text-[#A8B8CC] block mt-2 z-10 relative">
+            Axiom System Notification · Translation: Development Active · Thank You for Visiting
           </span>
         </div>
 
         {/* Saved Success Notification */}
         {savedSuccess && (
-          <div className="bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 rounded-xl p-4 flex items-center gap-3 text-xs">
-            <Check size={16} />
-            <span>Profile and system preferences saved successfully to persistent local storage!</span>
+          <div className="bg-emerald-500/12 border border-emerald-500/30 text-emerald-300 rounded-xl p-4 flex items-center gap-3 text-sm">
+            <Check size={16} className="text-emerald-400 shrink-0" />
+            <span>Profile and system preferences saved successfully!</span>
           </div>
         )}
 
         {/* Main Grid: Personal Identity vs Focus Signals */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 items-start">
           
-          {/* Card 1: Personal Identity exactly as Screenshot 3 */}
-          <div className="bg-[#0b1d31] border border-[#142944] rounded-2xl p-6 space-y-6">
-            <h3 className="text-sm font-bold font-display text-[#e0a96d] flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#e0a96d]" />
-              <span>Personal Identity</span>
-            </h3>
+          {/* Card 1: Personal Identity */}
+          <div className="axiom-card rounded-2xl p-6 space-y-6">
+            <div className="border-b border-[#1D3555] pb-3">
+              <h3 className="text-base font-bold font-display text-[#FFFFFF]">Personal Identity</h3>
+              <p className="text-xs text-[#A8B8CC] mt-0.5">Customize your avatar and account details</p>
+            </div>
 
             {/* Avatar Selector Block */}
-            <div className="bg-[#051120] border border-[#1a2c42] p-4 rounded-xl flex items-center gap-5">
+            <div className="axiom-inset p-4 rounded-xl flex items-center gap-5">
               <div 
-                className="w-16 h-16 rounded-2xl overflow-hidden bg-[#1e293b] border-2 border-[#e0a96d]/20 p-1 flex-shrink-0 cursor-pointer" 
+                className="w-16 h-16 rounded-2xl overflow-hidden bg-[#101F35] border border-[#00A3FF]/35 p-1 flex-shrink-0 cursor-pointer hover:border-[#00A3FF] transition-colors" 
                 dangerouslySetInnerHTML={{ __html: selectedAvatarData.svg }}
                 onClick={() => setShowAvatarSelector(!showAvatarSelector)}
                 title="Click to select different avatar"
               />
               <div className="space-y-1">
-                <span className="text-xs font-bold text-white block">Profile Avatar</span>
-                <span className="text-[10px] text-gray-400 block mb-2">Your current identity representation across the system.</span>
+                <span className="text-sm font-semibold text-[#FFFFFF] block">Profile Avatar</span>
+                <span className="text-xs text-[#A8B8CC] block mb-2.5">Your current identity representation across the workspace.</span>
                 <button
                   type="button"
                   onClick={() => setShowAvatarSelector(!showAvatarSelector)}
-                  className="px-3 py-1.5 border border-[#1a2c42] hover:border-[#e0a96d]/40 rounded-lg text-[10px] font-bold text-gray-300 hover:text-white hover:bg-[#10243d] transition-colors"
+                  className="px-3.5 py-1.5 axiom-btn-secondary rounded-lg text-xs cursor-pointer"
                 >
-                  {showAvatarSelector ? 'CLOSE SELECTOR' : 'SELECT AVATAR'}
+                  {showAvatarSelector ? 'Close Selector' : 'Select Avatar'}
                 </button>
               </div>
             </div>
 
-            {/* Hidden Avatar Carousel */}
+            {/* Expandable Avatar Selector */}
             {showAvatarSelector && (
-              <div className="bg-[#051120] border border-[#e0a96d]/20 p-5 rounded-xl space-y-4">
-                <div className="flex items-center justify-between border-b border-[#12243d] pb-2">
-                  <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider font-semibold">
-                    Choose Your Node Agent Icon
+              <div className="axiom-inset border-[#00A3FF]/30 p-5 rounded-xl space-y-4">
+                <div className="flex items-center justify-between border-b border-[#1D3555] pb-2.5">
+                  <span className="text-xs font-medium text-[#A8B8CC]">
+                    Choose Your Avatar
                   </span>
-                  <span className="text-[9px] bg-[#e0a96d]/10 text-[#e0a96d] px-2 py-0.5 rounded-full font-mono uppercase">
-                    {AVATARS.length} Agents
+                  <span className="text-xs text-[#00A3FF] font-mono tabular-nums">
+                    {AVATARS.length} available
                   </span>
                 </div>
 
-                {/* Segmented controls for Age Group Category */}
-                <div className="grid grid-cols-4 gap-1 bg-[#071324] p-1 rounded-xl border border-[#1a2c42]">
+                <div className="grid grid-cols-4 gap-1 bg-[#07111F] p-1 rounded-xl border border-[#1D3555]">
                   {['Child', 'Adult', 'Older Adult', 'Senior'].map((cat) => (
                     <button
                       key={cat}
                       type="button"
                       onClick={() => setSelectedCategory(cat)}
-                      className={`py-1.5 text-[9px] sm:text-[10px] font-mono uppercase tracking-wider font-bold rounded-lg transition-all ${
+                      className={`py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer truncate px-1 ${
                         activeCategory === cat
-                          ? 'bg-[#e0a96d] text-[#071324] shadow-md'
-                          : 'text-gray-400 hover:text-white hover:bg-[#0b1d31]'
+                          ? 'bg-[#0066FF] text-[#FFFFFF] font-semibold shadow-sm'
+                          : 'text-[#A8B8CC] hover:text-[#FFFFFF] hover:bg-[#101F35]'
                       }`}
                     >
                       {cat}
@@ -150,7 +150,6 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
                   ))}
                 </div>
 
-                {/* Displaying subcategories under the selected Age Group Category */}
                 <div className="space-y-4 pt-1">
                   {Array.from(
                     new Set(
@@ -166,9 +165,8 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
                     );
                     return (
                       <div key={subcat} className="space-y-2">
-                        <h4 className="text-[9px] font-mono text-[#e0a96d]/80 uppercase tracking-widest font-bold flex items-center gap-2">
-                          <span className="w-1 h-1 rounded-full bg-[#e0a96d]/50" />
-                          <span>{subcat}s</span>
+                        <h4 className="text-xs font-medium text-[#00A3FF]">
+                          {subcat}s
                         </h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {subcatAvatars.map((av) => (
@@ -180,21 +178,21 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
                                 setShowAvatarSelector(false);
                                 setSelectedCategory(null);
                               }}
-                              className={`p-3 bg-[#0b1d31] hover:bg-[#10243d] border rounded-xl transition-all flex items-center gap-3 text-left ${
+                              className={`p-3 rounded-xl border transition-all flex items-center gap-3 text-left cursor-pointer ${
                                 avatar === av.id
-                                  ? 'border-[#e0a96d] bg-[#10243d]'
-                                  : 'border-[#1a2c42]'
+                                  ? 'border-[#00A3FF] bg-[#0066FF]/15'
+                                  : 'border-[#1D3555] bg-[#101F35] hover:bg-[#0B172A] hover:border-[#00A3FF]/45'
                               }`}
                             >
                               <div
-                                className="w-10 h-10 rounded-lg bg-[#111827] p-0.5 shrink-0"
+                                className="w-10 h-10 rounded-lg bg-[#07111F] p-0.5 shrink-0"
                                 dangerouslySetInnerHTML={{ __html: av.svg }}
                               />
                               <div className="min-w-0">
-                                <span className="text-[11px] font-bold text-white block truncate">
+                                <span className="text-xs font-semibold text-[#FFFFFF] block truncate">
                                   {av.name}
                                 </span>
-                                <span className="text-[9px] text-gray-500 font-mono block uppercase">
+                                <span className="text-[11px] text-[#A8B8CC] block">
                                   {av.subcategory}
                                 </span>
                               </div>
@@ -208,71 +206,71 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
               </div>
             )}
 
-            {/* Inputs styled with clean labels exactly as Screenshot 3 */}
+            {/* Inputs */}
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[10px] font-mono text-gray-500 uppercase tracking-widest font-bold block mb-1.5">FIRST NAME</label>
+                  <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">First Name</label>
                   <input
                     type="text"
                     required
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-[#051120] border border-[#1a2c42] rounded-xl text-sm text-white focus:outline-none focus:border-[#e0a96d]/50 transition-colors"
+                    className="w-full px-4 py-2.5 axiom-input rounded-xl text-sm"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] font-mono text-gray-500 uppercase tracking-widest font-bold block mb-1.5">LAST NAME</label>
+                  <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Last Name</label>
                   <input
                     type="text"
                     required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-[#051120] border border-[#1a2c42] rounded-xl text-sm text-white focus:outline-none focus:border-[#e0a96d]/50 transition-colors"
+                    className="w-full px-4 py-2.5 axiom-input rounded-xl text-sm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-[10px] font-mono text-gray-500 uppercase tracking-widest font-bold block mb-1.5">EMAIL ADDRESS</label>
+                <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Email Address</label>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-[#051120] border border-[#1a2c42] rounded-xl text-sm text-white focus:outline-none focus:border-[#e0a96d]/50 transition-colors"
+                  className="w-full px-4 py-2.5 axiom-input rounded-xl text-sm"
                 />
               </div>
             </div>
           </div>
 
-          {/* Card 2: Focus Signals exactly as Screenshot 3 */}
-          <div className="bg-[#0b1d31] border border-[#142944] rounded-2xl p-6 space-y-6">
-            <div>
-              <h3 className="text-sm font-bold font-display text-[#e0a96d] flex items-center gap-2 mb-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#e0a96d]" />
-                <span>Focus Signals</span>
-              </h3>
-              <p className="text-[11px] text-gray-400 leading-relaxed">
-                Configure how Axiom interrupts your flow state. We recommend keeping notifications minimal to preserve architectural clarity.
+          {/* Card 2: Focus Signals */}
+          <div className="axiom-card rounded-2xl p-6 space-y-5">
+            <div className="border-b border-[#1D3555] pb-3">
+              <h3 className="text-base font-bold font-display text-[#FFFFFF]">Focus Signals</h3>
+              <p className="text-xs text-[#A8B8CC] mt-0.5 leading-relaxed">
+                Configure how Axiom delivers reminders while keeping notifications minimal.
               </p>
             </div>
 
             {/* Toggle Switch 1 */}
-            <div className="bg-[#051120] border border-[#1a2c42] p-4 rounded-xl flex items-center justify-between gap-4">
-              <div className="space-y-1">
-                <span className="text-xs font-bold text-white block">Motivational Reminders</span>
-                <span className="text-[10px] text-gray-400 block">Daily pushes to maintain momentum.</span>
+            <div className="axiom-inset p-4 rounded-xl flex items-center justify-between gap-4">
+              <div className="space-y-0.5">
+                <span className="text-sm font-semibold text-[#FFFFFF] block">Motivational Reminders</span>
+                <span className="text-xs text-[#A8B8CC] block">Daily nudges to maintain steady momentum.</span>
               </div>
               <button
                 type="button"
+                role="switch"
+                aria-checked={motivationalReminders}
+                aria-label="Toggle motivational reminders"
                 onClick={() => setMotivationalReminders(!motivationalReminders)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${
-                  motivationalReminders ? 'bg-[#e0a96d]' : 'bg-[#1e293b]'
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer shrink-0 ${
+                  motivationalReminders ? 'bg-[#0066FF]' : 'bg-[#1D3555]'
                 }`}
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-[#071324] transition-transform ${
+                  className={`inline-block h-4 w-4 transform rounded-full bg-[#FFFFFF] transition-transform ${
                     motivationalReminders ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
@@ -280,32 +278,35 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
             </div>
 
             {/* Toggle Switch 2 */}
-            <div className="bg-[#051120] border border-[#1a2c42] p-4 rounded-xl flex items-center justify-between gap-4">
-              <div className="space-y-1">
-                <span className="text-xs font-bold text-white block">Goal Milestones</span>
-                <span className="text-[10px] text-gray-400 block">Alerts when passing major milestones.</span>
+            <div className="axiom-inset p-4 rounded-xl flex items-center justify-between gap-4">
+              <div className="space-y-0.5">
+                <span className="text-sm font-semibold text-[#FFFFFF] block">Goal Milestones</span>
+                <span className="text-xs text-[#A8B8CC] block">Alerts when passing major strategic milestones.</span>
               </div>
               <button
                 type="button"
+                role="switch"
+                aria-checked={goalMilestones}
+                aria-label="Toggle goal milestones alerts"
                 onClick={() => setGoalMilestones(!goalMilestones)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${
-                  goalMilestones ? 'bg-[#e0a96d]' : 'bg-[#1e293b]'
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer shrink-0 ${
+                  goalMilestones ? 'bg-[#0066FF]' : 'bg-[#1D3555]'
                 }`}
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-[#071324] transition-transform ${
+                  className={`inline-block h-4 w-4 transform rounded-full bg-[#FFFFFF] transition-transform ${
                     goalMilestones ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
               </button>
             </div>
 
-            {/* Extra Settings Panel helper */}
-            <div className="bg-amber-500/5 border border-[#e0a96d]/15 p-4 rounded-xl flex items-start gap-3">
-              <AlertCircle size={16} className="text-[#e0a96d] mt-0.5 flex-shrink-0" />
-              <div className="text-[11px] text-gray-400 leading-relaxed">
-                <strong className="text-white block mb-0.5">Persistence Status</strong>
-                Your profile updates are stored locally. Clearing your web browser cookies or offline storage will reset configuration parameters.
+            {/* Persistence info panel */}
+            <div className="bg-[#0066FF]/10 border border-[#00A3FF]/25 p-4 rounded-xl flex items-start gap-3">
+              <AlertCircle size={16} className="text-[#00A3FF] mt-0.5 flex-shrink-0" />
+              <div className="text-xs text-[#A8B8CC] leading-relaxed">
+                <strong className="text-[#FFFFFF] block mb-0.5">Persistence Status</strong>
+                Your profile updates sync to your Axiom account or browser sandbox storage automatically.
               </div>
             </div>
           </div>
@@ -313,8 +314,9 @@ export default function ProfileSettings({ profile, onSaveProfile, onCancel, onOp
         </div>
       </form>
 
-      {/* Corporate Academic Footer credits exactly matching Reusable footer */}
-      <Footer idPrefix="settings" onOpenInfo={onOpenInfo} />
+      <div className="max-w-6xl w-full mx-auto">
+        <Footer idPrefix="settings" onOpenInfo={onOpenInfo} />
+      </div>
     </div>
   );
 }

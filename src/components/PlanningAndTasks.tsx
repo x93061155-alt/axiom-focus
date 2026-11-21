@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layers, Search, Check, Plus, Trash2, CheckSquare, Square, CornerDownRight, GripVertical } from 'lucide-react';
+import { Layers, Search, Plus, Trash2, CheckSquare, Square, GripVertical } from 'lucide-react';
 import { Goal, GoalCategory, Task } from '../types';
 import Footer from './Footer';
 
@@ -49,14 +49,12 @@ export default function PlanningAndTasks({
     onReorderTasks(selectedGoal.id, updatedTasks);
   };
 
-  // Automatically select the first available goal if none is selected
   useEffect(() => {
     if (!selectedGoalId && goals.length > 0) {
       setSelectedGoalId(goals[0].id);
     }
   }, [goals, selectedGoalId, setSelectedGoalId]);
 
-  // Filter plans based on search or category
   const filteredGoals = goals.filter((g) => {
     const matchesSearch = g.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'ALL' || g.category === selectedCategory;
@@ -72,38 +70,35 @@ export default function PlanningAndTasks({
     setNewTaskTitle('');
   };
 
-  const getCategoryStyle = (category: GoalCategory) => {
+  const getCategoryTextColor = (category: GoalCategory) => {
     switch (category) {
       case 'PERSONAL':
-        return 'text-amber-400 border-amber-500/20 bg-amber-500/10';
+        return 'text-[#00A3FF]';
       case 'FITNESS':
-        return 'text-blue-400 border-blue-500/20 bg-blue-500/10';
+        return 'text-sky-400';
       case 'BUSINESS':
-        return 'text-purple-400 border-purple-500/20 bg-purple-500/10';
+        return 'text-indigo-400';
       case 'ACADEMIC':
-        return 'text-emerald-400 border-emerald-500/20 bg-emerald-500/10';
+        return 'text-emerald-400';
       case 'LIFESTYLE':
-        return 'text-pink-400 border-pink-500/20 bg-pink-500/10';
+        return 'text-rose-400';
     }
   };
 
   return (
-    <div id="planning-tab" className="flex-1 overflow-y-auto bg-[#071324] text-white p-4 sm:p-6 md:p-10 flex flex-col justify-between min-h-screen">
-      <div>
-        {/* Title Header exactly as Screenshot 2 */}
-        <div className="mb-8 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-[#12243d] pb-6">
+    <div id="planning-tab" className="flex-1 overflow-y-auto text-[#FFFFFF] p-5 sm:p-8 md:p-10 flex flex-col justify-between min-h-full">
+      <div className="max-w-6xl w-full mx-auto">
+        {/* Title & Filter Toolbar */}
+        <div className="mb-8 flex flex-col lg:flex-row lg:items-end justify-between gap-4 border-b border-[#1D3555] pb-6">
           <div>
-            <h2 className="text-2xl md:text-4xl font-extrabold font-display leading-tight flex items-center gap-2">
-              <span>Planning & Tasks</span>
-            </h2>
-            <p className="text-xs text-gray-400 mt-1">Organize and execute your architectural blueprints</p>
+            <span className="text-xs font-medium text-[#00A3FF] block mb-1">Execution Blueprint</span>
+            <h2 className="text-3xl md:text-4xl font-bold font-display leading-tight text-[#FFFFFF]">Planning & Tasks</h2>
+            <p className="text-sm text-[#A8B8CC] mt-1.5">Organize and execute your strategic milestones</p>
           </div>
 
-          {/* Search/Filters layout on the right */}
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-            {/* Search Box */}
             <div className="relative w-full sm:w-64">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-[#A8B8CC]">
                 <Search size={14} />
               </span>
               <input
@@ -111,15 +106,14 @@ export default function PlanningAndTasks({
                 placeholder="Search plans & tasks..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 bg-[#051120] border border-[#1a2c42] rounded-xl text-xs text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#e0a96d]/40 transition-colors"
+                className="w-full pl-9 pr-4 py-2 axiom-input rounded-xl text-xs"
               />
             </div>
 
-            {/* Category Select Dropdown */}
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value as GoalCategory | 'ALL')}
-              className="w-full sm:w-auto px-3.5 py-2 bg-[#051120] border border-[#1a2c42] rounded-xl text-xs text-gray-400 hover:text-gray-200 focus:outline-none focus:border-[#e0a96d]/40 transition-colors cursor-pointer"
+              className="w-full sm:w-auto px-3.5 py-2 axiom-input rounded-xl text-xs cursor-pointer"
             >
               <option value="ALL">All Categories</option>
               <option value="PERSONAL">Personal</option>
@@ -131,23 +125,22 @@ export default function PlanningAndTasks({
           </div>
         </div>
 
-        {/* Two-Column Workspace layout exactly matching Screenshot 2 */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Two-Column Workspace */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
           
-          {/* Left Column: Active Plans List (span 5) */}
-          <div className="lg:col-span-5 bg-[#0b1d31]/40 border border-[#142944] rounded-2xl p-4">
-            <div className="flex justify-between items-center mb-4 pb-2 border-b border-[#12243d]">
-              <h3 className="text-xs font-mono font-bold text-gray-400 uppercase tracking-wider">Active Plans</h3>
-              <span className="text-xs font-mono bg-[#051120] border border-[#1a2c42] text-[#e0a96d] px-2.5 py-0.5 rounded-full font-semibold">
-                {filteredGoals.length} Plans
+          {/* Left Column: Active Plans List */}
+          <div className="lg:col-span-5 axiom-card rounded-2xl p-5">
+            <div className="flex justify-between items-center mb-4 pb-3 border-b border-[#1D3555]">
+              <h3 className="text-sm font-semibold text-[#FFFFFF]">Active Plans</h3>
+              <span className="text-xs font-mono tabular-nums text-[#00A3FF]">
+                {filteredGoals.length} {filteredGoals.length === 1 ? 'plan' : 'plans'}
               </span>
             </div>
 
-            {/* Scrollable list */}
-            <div className="flex flex-col gap-2 max-h-[500px] overflow-y-auto pr-1">
+            <div className="flex flex-col gap-2.5 max-h-[520px] overflow-y-auto pr-1">
               {filteredGoals.length === 0 ? (
-                <div className="text-center py-12 text-gray-500 text-xs">
-                  No active blueprints found matching query.
+                <div className="text-center py-12 text-[#A8B8CC] text-xs">
+                  No active blueprints found matching your query.
                 </div>
               ) : (
                 filteredGoals.map((g) => {
@@ -157,95 +150,91 @@ export default function PlanningAndTasks({
                   const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : (g.status === 'DONE' ? 100 : 0);
 
                   return (
-                    <div
+                    <button
+                      type="button"
                       key={g.id}
                       onClick={() => setSelectedGoalId(g.id)}
-                      className={`p-4 rounded-xl border text-left cursor-pointer transition-all duration-200 ${
+                      className={`p-4 rounded-xl border text-left cursor-pointer transition-all duration-150 w-full ${
                         isActive
-                          ? 'bg-[#0f243c] border-[#e0a96d]/40 shadow-md scale-[1.01]'
-                          : 'bg-[#0b1d31] border-[#142944] hover:bg-[#0c1a2e] hover:border-[#1a3a5f]'
+                          ? 'bg-[#0066FF]/18 border-[#00A3FF]/50 shadow-sm'
+                          : 'bg-[#0B172A] border-[#1D3555] hover:bg-[#101F35] hover:border-[#00A3FF]/40'
                       }`}
                     >
-                      <div className="flex justify-between items-start mb-2">
-                        <div className="truncate pr-2">
-                          <h4 className="text-sm font-bold text-white truncate group-hover:text-[#e0a96d]">{g.title}</h4>
-                          <span className="text-[10px] text-gray-500 font-mono mt-0.5 block">
-                            📅 {g.dueDate ? new Date(g.dueDate).toLocaleDateString() : 'No date'}
+                      <div className="flex justify-between items-start gap-2 mb-2">
+                        <div className="min-w-0">
+                          <h4 className={`text-sm font-semibold truncate ${isActive ? 'text-[#00A3FF]' : 'text-[#FFFFFF]'}`}>{g.title}</h4>
+                          <span className="text-[11px] text-[#A8B8CC] font-mono tabular-nums mt-0.5 block">
+                            Due {g.dueDate ? new Date(g.dueDate).toLocaleDateString() : 'No date'}
                           </span>
                         </div>
-                        <span className={`px-2 py-0.5 rounded-full text-[8px] font-mono font-bold uppercase border ${getCategoryStyle(g.category)}`}>
-                          {g.category}
+                        <span className={`text-[11px] font-semibold capitalize shrink-0 ${getCategoryTextColor(g.category)}`}>
+                          {g.category.toLowerCase()}
                         </span>
                       </div>
 
-                      {/* Info / Progress bar exactly as in Screenshot 2 */}
-                      <div className="flex items-center justify-between text-[10px] font-mono text-gray-500 mb-1.5 mt-3">
+                      <div className="flex items-center justify-between text-[11px] font-mono tabular-nums text-[#A8B8CC] mb-1.5 mt-3">
                         <span>{completedTasks}/{totalTasks} tasks</span>
-                        <span className="text-[#e0a96d] font-bold">{progress}%</span>
+                        <span className="text-[#00A3FF] font-semibold">{progress}%</span>
                       </div>
-                      <div className="w-full bg-[#051120] h-1.5 rounded-full overflow-hidden border border-[#1a2c42]/30">
+                      <div className="w-full bg-[#07111F] h-1.5 rounded-full overflow-hidden border border-[#1D3555]">
                         <div
-                          className="bg-[#e0a96d] h-full rounded-full transition-all duration-300"
+                          className="bg-gradient-to-r from-[#0066FF] to-[#00A3FF] h-full rounded-full transition-all duration-300"
                           style={{ width: `${progress}%` }}
                         />
                       </div>
-                    </div>
+                    </button>
                   );
                 })
               )}
             </div>
           </div>
 
-          {/* Right Column: TASKS & MILESTONES (span 7) */}
-          <div className="lg:col-span-7 bg-[#0b1d31] border border-[#142944] rounded-2xl p-6 min-h-[450px] flex flex-col justify-between">
+          {/* Right Column: Tasks & Milestones */}
+          <div className="lg:col-span-7 axiom-card rounded-2xl p-6 min-h-[460px] flex flex-col justify-between">
             {selectedGoal ? (
               <div>
-                {/* Active Plan Detail Header */}
-                <div className="mb-6 border-b border-[#12243d] pb-5">
-                  <div className="flex justify-between items-start mb-1.5">
-                    <h3 className="text-xl font-extrabold text-white font-display">{selectedGoal.title}</h3>
-                    <span className="text-lg font-mono text-[#e0a96d] font-extrabold">
+                <div className="mb-6 border-b border-[#1D3555] pb-5">
+                  <div className="flex justify-between items-start gap-4 mb-1.5">
+                    <h3 className="text-xl font-bold text-[#FFFFFF] font-display">{selectedGoal.title}</h3>
+                    <span className="text-xl font-mono tabular-nums text-[#00A3FF] font-bold shrink-0">
                       {selectedGoal.tasks.length > 0
                         ? `${Math.round((selectedGoal.tasks.filter(t => t.isCompleted).length / selectedGoal.tasks.length) * 100)}%`
                         : (selectedGoal.status === 'DONE' ? '100%' : '0%')}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-400 font-medium mb-3">{selectedGoal.description || 'No description'}</p>
-                  <span className="text-[10px] font-mono uppercase bg-[#e0a96d]/10 text-[#e0a96d] border border-[#e0a96d]/20 px-2.5 py-1 rounded-md">
-                    PROGRESS
-                  </span>
+                  <p className="text-xs text-[#A8B8CC] leading-relaxed">{selectedGoal.description || 'No description provided.'}</p>
                 </div>
 
                 {/* Task Creation Form */}
-                <form onSubmit={handleAddTaskSubmit} className="mb-6 flex gap-2">
+                <form onSubmit={handleAddTaskSubmit} className="mb-6 flex gap-2.5">
                   <input
                     type="text"
                     required
-                    placeholder="Enter task / milestone description..."
+                    placeholder="Add a milestone or actionable task..."
                     value={newTaskTitle}
                     onChange={(e) => setNewTaskTitle(e.target.value)}
-                    className="flex-1 px-4 py-2.5 bg-[#051120] border border-[#1a2c42] rounded-xl text-xs text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#e0a96d]/40 transition-colors"
+                    className="flex-1 px-4 py-2.5 axiom-input rounded-xl text-sm"
                   />
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-[#e0a96d] hover:bg-[#f3bf84] text-[#071324] font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors"
+                    className="px-4 py-2.5 axiom-btn-primary text-xs rounded-xl flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
                   >
-                    <Plus size={14} />
-                    <span>ADD TASK</span>
+                    <Plus size={15} strokeWidth={2.5} />
+                    <span>Add Task</span>
                   </button>
                 </form>
 
                 {/* Tasks Header */}
-                <div className="flex justify-between items-center mb-4">
-                  <h4 className="text-[10px] font-mono text-gray-400 uppercase tracking-wider font-bold">TASKS & MILESTONES</h4>
-                  <span className="text-[10px] text-gray-500 font-mono">Drag to reorder</span>
+                <div className="flex justify-between items-center mb-3.5">
+                  <h4 className="text-xs font-semibold text-[#FFFFFF]">Tasks & Milestones</h4>
+                  <span className="text-xs text-[#A8B8CC]">Drag to reorder</span>
                 </div>
 
-                {/* Scrollable list of Tasks */}
-                <div className="flex flex-col gap-2 max-h-[300px] overflow-y-auto pr-1">
+                {/* Task List */}
+                <div className="flex flex-col gap-2 max-h-[320px] overflow-y-auto pr-1">
                   {selectedGoal.tasks.length === 0 ? (
-                    <div className="border border-dashed border-[#1a2c42] rounded-xl p-12 text-center text-gray-500 text-xs my-4">
-                      No tasks created for this plan yet.
+                    <div className="border border-dashed border-[#1D3555] rounded-xl p-12 text-center text-[#A8B8CC] text-xs my-2">
+                      No tasks created for this plan yet. Add your first milestone above.
                     </div>
                   ) : (
                     selectedGoal.tasks.map((task, idx) => (
@@ -255,26 +244,27 @@ export default function PlanningAndTasks({
                         onDragStart={(e) => handleDragStart(e, idx)}
                         onDragOver={handleDragOver}
                         onDrop={(e) => handleDrop(e, idx)}
-                        className="bg-[#051120] border border-[#1a2c42] rounded-xl p-3 flex items-center justify-between group hover:border-[#e0a96d]/20 transition-all duration-200 cursor-grab active:cursor-grabbing"
+                        className="axiom-inset rounded-xl p-3 flex items-center justify-between group hover:border-[#00A3FF]/40 transition-all duration-150 cursor-grab active:cursor-grabbing"
                       >
-                        <div className="flex items-center gap-2 flex-1 min-w-0">
-                          <GripVertical size={14} className="text-gray-600 group-hover:text-gray-400 cursor-grab flex-shrink-0" />
+                        <div className="flex items-center gap-2.5 flex-1 min-w-0">
+                          <GripVertical size={14} className="text-[#1D3555] group-hover:text-[#A8B8CC] cursor-grab flex-shrink-0" />
                           <button
                             type="button"
                             onClick={() => onToggleTask(selectedGoal.id, task.id)}
-                            className={`p-0.5 rounded-md transition-colors ${
+                            aria-label={task.isCompleted ? 'Mark task incomplete' : 'Mark task complete'}
+                            className={`p-0.5 rounded-md transition-colors cursor-pointer ${
                               task.isCompleted
                                 ? 'text-emerald-400'
-                                : 'text-gray-500 hover:text-[#e0a96d]'
+                                : 'text-[#A8B8CC] hover:text-[#00A3FF]'
                             }`}
                           >
                             {task.isCompleted ? <CheckSquare size={18} /> : <Square size={18} />}
                           </button>
                           <span
-                            className={`text-xs truncate transition-all ${
+                            className={`text-sm truncate transition-all ${
                               task.isCompleted
-                                ? 'line-through text-gray-500 font-medium'
-                                : 'text-gray-200 font-semibold'
+                                ? 'line-through text-[#A8B8CC]/60'
+                                : 'text-[#FFFFFF] font-medium'
                             }`}
                           >
                             {task.title}
@@ -282,11 +272,13 @@ export default function PlanningAndTasks({
                         </div>
 
                         <button
+                          type="button"
                           onClick={() => onDeleteTask(selectedGoal.id, task.id)}
-                          className="text-gray-500 hover:text-red-400 opacity-0 group-hover:opacity-100 p-1 rounded-lg hover:bg-red-500/10 transition-all cursor-pointer"
+                          className="text-[#A8B8CC] hover:text-rose-400 opacity-70 sm:opacity-0 sm:group-hover:opacity-100 p-1.5 rounded-lg hover:bg-rose-500/10 transition-all cursor-pointer"
                           title="Delete Milestone"
+                          aria-label="Delete Milestone"
                         >
-                          <Trash2 size={13} />
+                          <Trash2 size={14} />
                         </button>
                       </div>
                     ))
@@ -294,18 +286,19 @@ export default function PlanningAndTasks({
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-center text-gray-500 py-12">
-                <Layers size={40} className="text-gray-600 mb-3" />
-                <p className="text-xs">Select an active plan from the left panel to map milestones.</p>
+              <div className="flex flex-col items-center justify-center h-full text-center text-[#A8B8CC] py-14">
+                <Layers size={40} className="text-[#1D3555] mb-3" />
+                <p className="text-sm font-medium text-[#FFFFFF]">Select an active plan</p>
+                <p className="text-xs text-[#A8B8CC] mt-1">Choose a goal from the left panel to map and reorder milestones.</p>
               </div>
             )}
           </div>
-
         </div>
       </div>
 
-      {/* Corporate Academic Footer credits exactly matching Reusable footer */}
-      <Footer idPrefix="planning" onOpenInfo={onOpenInfo} />
+      <div className="max-w-6xl w-full mx-auto">
+        <Footer idPrefix="planning" onOpenInfo={onOpenInfo} />
+      </div>
     </div>
   );
 }

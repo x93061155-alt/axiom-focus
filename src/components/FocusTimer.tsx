@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause, RotateCcw, Timer, Sparkles, Volume2, VolumeX, Plus, Minus } from 'lucide-react';
+import { Play, Pause, RotateCcw, Sparkles, Volume2, VolumeX, Plus, Minus } from 'lucide-react';
 import Footer from './Footer';
 
 type TimerMode = 'deep_focus' | 'short_break' | 'long_break' | 'custom';
@@ -18,14 +18,12 @@ export default function FocusTimer({ onOpenInfo }: FocusTimerProps) {
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Mode durations in seconds
   const modeDurations: Record<Exclude<TimerMode, 'custom'>, number> = {
     deep_focus: 25 * 60,
     short_break: 5 * 60,
     long_break: 15 * 60,
   };
 
-  // Synchronize timer with mode selections
   useEffect(() => {
     setIsActive(false);
     if (timerRef.current) clearInterval(timerRef.current);
@@ -37,14 +35,12 @@ export default function FocusTimer({ onOpenInfo }: FocusTimerProps) {
     }
   }, [mode, customMinutes]);
 
-  // Clean up timer on unmount
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, []);
 
-  // Beep synthesizer using Web Audio API (totally secure and works without external MP3 files!)
   const playCompletionSound = () => {
     if (!isSoundOn) return;
     try {
@@ -56,11 +52,10 @@ export default function FocusTimer({ onOpenInfo }: FocusTimerProps) {
       gainNode.connect(audioCtx.destination);
 
       oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(880, audioCtx.currentTime); // A5 note
+      oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
       gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
 
       oscillator.start();
-      // Stop oscillator after 0.5s
       setTimeout(() => {
         oscillator.stop();
         audioCtx.close();
@@ -70,7 +65,6 @@ export default function FocusTimer({ onOpenInfo }: FocusTimerProps) {
     }
   };
 
-  // Timer Tick Action
   useEffect(() => {
     if (isActive) {
       timerRef.current = setInterval(() => {
@@ -108,7 +102,6 @@ export default function FocusTimer({ onOpenInfo }: FocusTimerProps) {
     }
   };
 
-  // Helper: Format seconds to HH:MM:SS or MM:SS
   const formatTime = (totalSeconds: number) => {
     const hrs = Math.floor(totalSeconds / 3600);
     const mins = Math.floor((totalSeconds % 3600) / 60);
@@ -119,172 +112,173 @@ export default function FocusTimer({ onOpenInfo }: FocusTimerProps) {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  // Helper: Format custom minutes to standard layout or hours
   const formatCustomMinutes = (mins: number) => {
     if (mins < 60) {
-      return `${mins} MINS`;
+      return `${mins} mins`;
     }
     const hours = Math.floor(mins / 60);
     const remainingMins = mins % 60;
     if (remainingMins === 0) {
-      return `${hours} ${hours === 1 ? 'HOUR' : 'HOURS'}`;
+      return `${hours} ${hours === 1 ? 'hour' : 'hours'}`;
     }
-    return `${hours} ${hours === 1 ? 'HR' : 'HRS'} ${remainingMins} MINS`;
+    return `${hours} ${hours === 1 ? 'hr' : 'hrs'} ${remainingMins} mins`;
   };
 
   const currentMaxDuration = mode === 'custom' ? customMinutes * 60 : modeDurations[mode];
   const progressRatio = secondsLeft / currentMaxDuration;
 
-  // Circle dynamic calculations
-  const radius = 90;
+  const radius = 96;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference * (1 - progressRatio);
 
   return (
-    <div id="timer-tab" className="flex-1 overflow-y-auto bg-[#071324] text-white p-4 sm:p-6 md:p-10 flex flex-col justify-between min-h-screen">
-      <div>
-        {/* Title exactly matching Screenshot 4 */}
-        <div className="mb-8">
-          <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest font-semibold block mb-1">DEEP WORK PROTOCOL</span>
-          <h2 className="text-2xl md:text-4xl font-extrabold font-display leading-tight">Pomodoro Focus Timer</h2>
-          <p className="text-xs text-gray-400 mt-1">Maximize productivity through structured sessions</p>
+    <div id="timer-tab" className="flex-1 overflow-y-auto text-[#FFFFFF] p-5 sm:p-8 md:p-10 flex flex-col justify-between min-h-full">
+      <div className="max-w-6xl w-full mx-auto">
+        {/* Page Header */}
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#1D3555] pb-6">
+          <div>
+            <span className="text-xs font-medium text-[#00A3FF] block mb-1">Deep Work Protocol</span>
+            <h2 className="text-3xl md:text-4xl font-bold font-display leading-tight text-[#FFFFFF]">Pomodoro Focus Timer</h2>
+            <p className="text-sm text-[#A8B8CC] mt-1.5">Maximize cognitive depth through structured work intervals</p>
+          </div>
         </div>
 
-        <div className="max-w-xl mx-auto bg-[#0b1d31] border border-[#142944] rounded-3xl p-6 md:p-8 flex flex-col items-center shadow-2xl relative">
-          
-          {/* Custom Success Overlay */}
+        <div className="max-w-xl mx-auto axiom-card rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col items-center relative overflow-hidden">
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-72 h-72 bg-[#0066FF]/12 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Completion Overlay */}
           {showSuccessOverlay && (
-            <div className="absolute inset-0 bg-[#071324]/95 border border-[#e0a96d]/40 rounded-3xl flex flex-col items-center justify-center p-6 text-center z-20">
-              <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-4 border border-emerald-500/20">
-                <Sparkles size={32} />
+            <div className="absolute inset-0 bg-[#0B172A]/95 backdrop-blur-md border border-[#00A3FF]/35 rounded-3xl flex flex-col items-center justify-center p-6 text-center z-20">
+              <div className="w-16 h-16 rounded-2xl bg-[#0066FF]/15 flex items-center justify-center text-[#00A3FF] mb-4 border border-[#00A3FF]/30">
+                <Sparkles size={30} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2 font-display">Axiom Session Complete!</h3>
-              <p className="text-xs text-gray-400 max-w-sm mb-6 leading-relaxed">
-                You have successfully focused for the allocated architectural time block. Take a well-deserved short or long rest.
+              <h3 className="text-xl font-bold text-[#FFFFFF] mb-2 font-display">Axiom Session Complete</h3>
+              <p className="text-sm text-[#A8B8CC] max-w-sm mb-6 leading-relaxed">
+                You completed your scheduled focus block. Take a short or long recovery break before your next session.
               </p>
               <button
                 onClick={() => setShowSuccessOverlay(false)}
-                className="px-5 py-2.5 bg-[#e0a96d] text-[#071324] font-bold text-xs rounded-xl hover:bg-[#f3bf84] transition-colors cursor-pointer"
+                className="px-6 py-2.5 axiom-btn-primary text-xs rounded-xl cursor-pointer"
               >
-                DISMISS NOTIFICATION
+                Dismiss Notification
               </button>
             </div>
           )}
 
-          {/* Sound toggle button */}
-          <button
-            onClick={() => setIsSoundOn(!isSoundOn)}
-            className="absolute top-6 right-6 p-2 rounded-xl text-gray-500 hover:text-[#e0a96d] hover:bg-[#10243d] transition-colors"
-            title={isSoundOn ? 'Mute alarm beep' : 'Unmute alarm beep'}
-          >
-            {isSoundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
-          </button>
+          {/* Mode Selector + Sound Control */}
+          <div className="w-full flex items-center gap-3 mb-9 relative z-10">
+            <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-1 axiom-inset p-1 rounded-xl">
+              {(['deep_focus', 'short_break', 'long_break', 'custom'] as const).map((m) => {
+                const label = m === 'deep_focus' ? 'Deep Focus' : m === 'short_break' ? 'Short Break' : m === 'long_break' ? 'Long Break' : 'Custom';
+                const isSel = mode === m;
+                return (
+                  <button
+                    key={m}
+                    onClick={() => setMode(m)}
+                    className={`py-2 px-2 text-xs font-semibold rounded-lg transition-all cursor-pointer whitespace-nowrap ${
+                      isSel
+                        ? 'bg-[#0066FF]/25 text-[#FFFFFF] border border-[#00A3FF]/45 shadow-sm'
+                        : 'border border-transparent text-[#A8B8CC] hover:text-[#FFFFFF] hover:bg-[#101F35]'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
 
-          {/* Mode Selector exactly as styled in Screenshot 4 */}
-          <div className="flex bg-[#051120] p-1.5 rounded-2xl border border-[#1a2c42]/50 mb-10 w-full">
-            {(['deep_focus', 'short_break', 'long_break', 'custom'] as const).map((m) => {
-              const label = m === 'deep_focus' ? 'DEEP FOCUS' : m === 'short_break' ? 'SHORT BREAK' : m === 'long_break' ? 'LONG BREAK' : 'CUSTOM TIMER';
-              const isSel = mode === m;
-              return (
-                <button
-                  key={m}
-                  onClick={() => setMode(m)}
-                  className={`flex-1 py-2 text-[10px] md:text-xs font-bold rounded-xl tracking-wider transition-all ${
-                    isSel
-                      ? 'bg-[#10243d] text-[#e0a96d] border border-[#e0a96d]/20 shadow-sm'
-                      : 'text-gray-400 hover:text-gray-200'
-                  }`}
-                >
-                  {label}
-                </button>
-              );
-            })}
+            <button
+              onClick={() => setIsSoundOn(!isSoundOn)}
+              className="p-2.5 rounded-xl axiom-inset text-[#A8B8CC] hover:text-[#00A3FF] hover:border-[#00A3FF]/40 transition-colors cursor-pointer shrink-0"
+              title={isSoundOn ? 'Mute alarm beep' : 'Unmute alarm beep'}
+              aria-label={isSoundOn ? 'Mute alarm beep' : 'Unmute alarm beep'}
+            >
+              {isSoundOn ? <Volume2 size={18} /> : <VolumeX size={18} />}
+            </button>
           </div>
 
-          {/* If custom timer, show interactive controls */}
+          {/* Custom Timer Controls */}
           {mode === 'custom' && (
-            <div className="flex items-center gap-4 mb-6 bg-[#051120] px-4 py-2 rounded-xl border border-[#1a2c42]/30">
-              <span className="text-xs text-gray-400 font-mono font-medium">CUSTOM DURATION:</span>
+            <div className="flex items-center gap-4 mb-6 axiom-inset px-4 py-2 rounded-xl relative z-10">
+              <span className="text-xs text-[#A8B8CC] font-medium">Duration</span>
               <button
                 onClick={() => setCustomMinutes(prev => Math.max(1, prev - 5))}
-                className="p-1 text-gray-400 hover:text-[#e0a96d]"
-                title="Decrease 5m"
+                className="p-1.5 rounded-lg text-[#A8B8CC] hover:text-[#00A3FF] hover:bg-[#101F35] transition-colors cursor-pointer"
+                title="Decrease 5 minutes"
+                aria-label="Decrease 5 minutes"
               >
                 <Minus size={14} />
               </button>
-              <span className="text-sm font-bold text-white font-mono">{formatCustomMinutes(customMinutes)}</span>
+              <span className="text-sm font-semibold text-[#FFFFFF] font-mono tabular-nums min-w-[4.5rem] text-center">{formatCustomMinutes(customMinutes)}</span>
               <button
                 onClick={() => setCustomMinutes(prev => Math.min(180, prev + 5))}
-                className="p-1 text-gray-400 hover:text-[#e0a96d]"
-                title="Increase 5m"
+                className="p-1.5 rounded-lg text-[#A8B8CC] hover:text-[#00A3FF] hover:bg-[#101F35] transition-colors cursor-pointer"
+                title="Increase 5 minutes"
+                aria-label="Increase 5 minutes"
               >
                 <Plus size={14} />
               </button>
             </div>
           )}
 
-          {/* Giant Circular Digital Timer Display exactly matching Screenshot 4 */}
-          <div className="relative w-64 h-64 flex items-center justify-center mb-8">
-            {/* SVG Progress Circle */}
-            <svg className="w-full h-full -rotate-90">
-              {/* Empty background track */}
+          {/* Circular Digital Timer Display */}
+          <div className="relative w-64 h-64 flex items-center justify-center mb-9 z-10">
+            <svg className="w-full h-full -rotate-90 drop-shadow-[0_0_24px_rgba(0,163,255,0.2)]" viewBox="0 0 256 256">
               <circle
                 cx="128"
                 cy="128"
                 r={radius}
-                className="stroke-[#051120] fill-none"
+                className="stroke-[#1D3555] fill-none"
                 strokeWidth="8"
               />
-              {/* Colored active slider track */}
               <circle
                 cx="128"
                 cy="128"
                 r={radius}
-                className="stroke-[#e0a96d] fill-none transition-all duration-300"
+                className="stroke-[#00A3FF] fill-none transition-all duration-300"
                 strokeWidth="8"
                 strokeDasharray={circumference}
-                strokeDashoffset={isActive ? strokeDashoffset : strokeDashoffset}
+                strokeDashoffset={strokeDashoffset}
                 strokeLinecap="round"
               />
             </svg>
 
-            {/* In-circle text: Countdown value + Status exactly as Screenshot 4 */}
             <div className="absolute text-center flex flex-col items-center">
-              <span className="text-5xl font-extrabold font-display text-white tracking-tight leading-none">
+              <span className="text-5xl font-bold font-mono tabular-nums text-[#FFFFFF] tracking-tight leading-none">
                 {formatTime(secondsLeft)}
               </span>
-              <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest font-semibold mt-2 block">
-                {isActive ? 'FOCUSING' : 'PAUSED'}
+              <span className="text-xs font-medium text-[#A8B8CC] mt-2.5 tracking-wide">
+                {isActive ? 'Focusing' : 'Paused'}
               </span>
             </div>
           </div>
 
-          {/* Control Buttons exactly as Screenshot 4 layout */}
-          <div className="flex items-center gap-6">
-            {/* Reset loop button */}
+          {/* Control Buttons */}
+          <div className="flex items-center gap-5 relative z-10">
             <button
               onClick={handleReset}
-              className="w-11 h-11 rounded-full bg-[#051120] border border-[#1a2c42] flex items-center justify-center text-gray-400 hover:text-white transition-all hover:bg-[#10243d] active:scale-95"
+              className="w-12 h-12 rounded-full axiom-btn-secondary flex items-center justify-center cursor-pointer"
               title="Reset Timer"
+              aria-label="Reset Timer"
             >
-              <RotateCcw size={16} />
+              <RotateCcw size={17} />
             </button>
 
-            {/* Play/Pause giant gold circular button */}
             <button
               onClick={toggleStart}
-              className="w-16 h-16 rounded-full bg-[#e0a96d] text-[#071324] flex items-center justify-center hover:bg-[#f3bf84] transition-all shadow-lg shadow-[#e0a96d]/20 active:scale-95"
+              className="w-16 h-16 rounded-full axiom-btn-primary flex items-center justify-center cursor-pointer"
               title={isActive ? 'Pause timer' : 'Start focus'}
+              aria-label={isActive ? 'Pause timer' : 'Start focus'}
             >
-              {isActive ? <Pause size={24} fill="#071324" /> : <Play size={24} fill="#071324" className="ml-1" />}
+              {isActive ? <Pause size={24} fill="#FFFFFF" /> : <Play size={24} fill="#FFFFFF" className="ml-0.5" />}
             </button>
           </div>
-
         </div>
       </div>
 
-      {/* Corporate Academic Footer credits exactly matching Reusable footer */}
-      <Footer idPrefix="timer" onOpenInfo={onOpenInfo} />
+      <div className="max-w-6xl w-full mx-auto">
+        <Footer idPrefix="timer" onOpenInfo={onOpenInfo} />
+      </div>
     </div>
   );
 }

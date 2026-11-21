@@ -9,34 +9,35 @@ export default function Footer({ idPrefix, onOpenInfo }: FooterProps) {
   return (
     <footer 
       id={`${idPrefix}-footer-reusable`} 
-      className="flex flex-col sm:flex-row items-center justify-between mt-12 pt-6 border-t border-[#12243d] text-[10px] text-gray-500 w-full"
+      className="flex flex-col sm:flex-row items-center justify-between mt-14 pt-6 border-t border-[#1D3555] text-xs text-[#A8B8CC] w-full gap-4"
     >
-      <div className="flex flex-col gap-1 text-center sm:text-left mb-4 sm:mb-0">
-        <span>© 2026 AXIOM GOAL SYSTEMS. ARCHITECTURAL CLARITY ASSURED.</span>
-        <span className="text-[#e0a96d]">CREATED BY CUTHMAN ADEM SHEIKH</span>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2.5 text-center sm:text-left">
+        <span>© 2026 Axiom Goal Systems</span>
+        <span className="hidden sm:inline text-[#1D3555]" aria-hidden="true">·</span>
+        <span className="text-[#00A3FF] font-medium">Created by Cuthman Adem Sheikh</span>
       </div>
-      <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
+      <div className="flex flex-wrap gap-5 justify-center">
         <button 
           onClick={() => onOpenInfo('storage')} 
-          className="hover:text-gray-300 transition-colors cursor-pointer"
+          className="text-[#A8B8CC] hover:text-[#00A3FF] transition-colors cursor-pointer whitespace-nowrap"
         >
           Storage Protocol
         </button>
         <button 
           onClick={() => onOpenInfo('terms')} 
-          className="hover:text-gray-300 transition-colors cursor-pointer"
+          className="text-[#A8B8CC] hover:text-[#00A3FF] transition-colors cursor-pointer whitespace-nowrap"
         >
           Terms of Service
         </button>
         <button 
           onClick={() => onOpenInfo('security')} 
-          className="hover:text-gray-300 transition-colors cursor-pointer"
+          className="text-[#A8B8CC] hover:text-[#00A3FF] transition-colors cursor-pointer whitespace-nowrap"
         >
           Security
         </button>
         <button 
           onClick={() => onOpenInfo('api')} 
-          className="hover:text-gray-300 transition-colors cursor-pointer"
+          className="text-[#A8B8CC] hover:text-[#00A3FF] transition-colors cursor-pointer whitespace-nowrap"
         >
           API Documentation
         </button>

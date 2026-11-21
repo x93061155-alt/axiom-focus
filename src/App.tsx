@@ -601,12 +601,16 @@ export default function App() {
   // Global Auth Loading Gate
   if (!authInitialized) {
     return (
-      <div id="axiom-loader-gate" className="fixed inset-0 flex items-center justify-center bg-[#050c16] text-white">
+      <div id="axiom-loader-gate" className="fixed inset-0 flex items-center justify-center axiom-canvas-bg text-[#FFFFFF]">
         <div className="flex flex-col items-center gap-4">
-          <svg viewBox="0 0 100 100" className="w-14 h-14 text-[#e0a96d] stroke-current fill-none animate-spin" strokeWidth="6">
-            <circle cx="50" cy="50" r="40" stroke="#e0a96d" strokeDasharray="180 50" />
-          </svg>
-          <span className="text-[10px] font-mono uppercase tracking-widest text-[#e0a96d]">Initializing Secure Vault...</span>
+          <div className="relative flex items-center justify-center w-14 h-14">
+            <div className="absolute inset-0 rounded-full bg-[#0066FF]/20 blur-xl" />
+            <svg viewBox="0 0 100 100" className="w-12 h-12 text-[#00A3FF] stroke-current fill-none animate-spin" strokeWidth="6">
+              <circle cx="50" cy="50" r="40" stroke="currentColor" strokeOpacity="0.2" />
+              <circle cx="50" cy="50" r="40" stroke="currentColor" strokeDasharray="160 90" strokeLinecap="round" />
+            </svg>
+          </div>
+          <span className="text-xs font-medium tracking-wide text-[#A8B8CC]">Initializing workspace...</span>
         </div>
       </div>
     );
@@ -623,29 +627,27 @@ export default function App() {
   }
 
   return (
-    <div id="axiom-app-root" className="flex flex-col md:flex-row h-screen w-screen overflow-hidden bg-[#050c16] font-sans antialiased">
+    <div id="axiom-app-root" className="flex flex-col md:flex-row h-screen w-screen overflow-hidden axiom-canvas-bg font-sans antialiased text-[#FFFFFF]">
       {/* Mobile Top Header Bar */}
-      <header id="mobile-top-header" className="md:hidden flex items-center justify-between bg-[#071120] border-b border-[#1a2c42] px-4 py-3 h-14 z-20 shrink-0">
+      <header id="mobile-top-header" className="md:hidden flex items-center justify-between bg-[#0B172A]/95 backdrop-blur-md border-b border-[#1D3555] px-4 py-2.5 h-14 z-20 shrink-0">
         <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => setActiveTab(isAdminUser ? 'admin' : 'overview')}>
-          <div className="w-8 h-8 bg-[#0c1a30] rounded-lg flex items-center justify-center border border-[#e0a96d]/20 relative overflow-hidden shadow-md">
-            <svg viewBox="0 0 100 100" className="w-5 h-5 text-[#e0a96d] stroke-current fill-none" strokeWidth="6">
-              <circle cx="50" cy="50" r="40" stroke="#e0a96d" />
-              <circle cx="50" cy="50" r="25" stroke="#e0a96d" strokeWidth="4" />
-              <circle cx="50" cy="50" r="10" fill="#e0a96d" />
+          <div className="w-8 h-8 bg-[#101F35] rounded-lg flex items-center justify-center border border-[#1D3555] relative overflow-hidden shadow-md">
+            <svg viewBox="0 0 100 100" className="w-5 h-5 text-[#00A3FF] stroke-current fill-none" strokeWidth="6">
+              <circle cx="50" cy="50" r="40" stroke="currentColor" />
+              <circle cx="50" cy="50" r="25" stroke="currentColor" strokeWidth="4" />
+              <circle cx="50" cy="50" r="10" fill="currentColor" />
             </svg>
           </div>
-          <div>
-            <span className="text-xs font-bold font-display text-[#e0a96d] leading-none block">Axiom Focus</span>
-            <span className="text-[8px] font-mono text-gray-500 uppercase tracking-widest leading-none mt-0.5">Peak Performance</span>
-          </div>
+          <span className="text-sm font-bold font-display text-[#FFFFFF] tracking-tight whitespace-nowrap">Axiom Focus</span>
         </div>
         
         {/* Mobile menu trigger */}
         <button 
           id="mobile-menu-trigger"
           onClick={() => setIsMobileMenuOpen(true)}
-          className="p-1.5 text-gray-400 hover:text-white rounded-lg hover:bg-[#10243d] transition-colors cursor-pointer"
+          className="p-2 text-[#A8B8CC] hover:text-[#FFFFFF] rounded-lg hover:bg-[#101F35] transition-colors cursor-pointer"
           title="Open menu"
+          aria-label="Open navigation menu"
         >
           <Menu size={20} />
         </button>
@@ -681,10 +683,10 @@ export default function App() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, x: 10 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -10 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="flex-1 flex flex-col overflow-hidden"
           >
             {renderTabContent()}

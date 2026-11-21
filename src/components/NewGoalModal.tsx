@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, Target, Plus, Calendar, Layers } from 'lucide-react';
-import { GoalCategory, GoalStatus } from '../types';
+import { X, Target, Plus } from 'lucide-react';
+import { GoalCategory } from '../types';
 
 interface NewGoalModalProps {
   isOpen: boolean;
@@ -29,7 +29,6 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
     e.preventDefault();
     if (!title.trim()) return;
 
-    // Split initial milestones by comma or newline
     const initialMilestones = milestonesInput
       .split(/[,\n]/)
       .map((m) => m.trim())
@@ -44,7 +43,6 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
       projectName.trim() || undefined
     );
 
-    // Reset Form
     setTitle('');
     setDescription('');
     setCategory('PERSONAL');
@@ -55,139 +53,129 @@ export default function NewGoalModal({ isOpen, onClose, onAddGoal }: NewGoalModa
   };
 
   return (
-    <div id="new-goal-modal-backdrop" className="fixed inset-0 bg-[#050c16]/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div id="new-goal-modal-backdrop" className="fixed inset-0 bg-[#07111F]/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
       <div 
         id="new-goal-modal-content" 
-        className="w-full max-w-xl bg-[#0b1d31] border border-[#142944] rounded-2xl shadow-2xl p-6 relative overflow-hidden"
+        className="w-full max-w-xl axiom-modal-panel rounded-2xl p-6 md:p-7 relative overflow-hidden"
       >
-        {/* Decorative corner glow */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-[#e0a96d]/10 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-40 h-40 bg-[#0066FF]/12 rounded-full blur-3xl pointer-events-none" />
 
         {/* Modal Header */}
-        <div className="flex justify-between items-center mb-6 border-b border-[#12243d] pb-4">
-          <div className="flex items-center gap-2">
-            <div className="text-[#e0a96d] bg-[#e0a96d]/10 p-1.5 rounded-lg">
+        <div className="flex justify-between items-center mb-6 border-b border-[#1D3555] pb-4 relative z-10">
+          <div className="flex items-center gap-3">
+            <div className="text-[#00A3FF] bg-[#0066FF]/15 border border-[#00A3FF]/30 p-2 rounded-xl">
               <Target size={18} />
             </div>
             <div>
-              <h3 className="text-lg font-bold font-display text-white">Create Strategic Node</h3>
-              <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest block font-semibold mt-0.5">Axiom Goal Architecture</span>
+              <h3 className="text-lg font-bold font-display text-[#FFFFFF]">Create Strategic Node</h3>
+              <span className="text-xs text-[#A8B8CC] block mt-0.5">Axiom Goal Architecture</span>
             </div>
           </div>
           
           <button 
             onClick={onClose}
-            className="p-1.5 rounded-lg text-gray-500 hover:text-white hover:bg-[#10243d] transition-colors"
+            aria-label="Close modal"
+            className="p-2 rounded-lg text-[#A8B8CC] hover:text-[#FFFFFF] hover:bg-[#101F35] transition-colors cursor-pointer"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          
-          {/* Project Name */}
+        <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
           <div>
-            <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest font-bold block mb-1.5">PROJECT NAME</label>
+            <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Project Name</label>
             <input
               type="text"
               placeholder="e.g. Project Axiom, Fitness Tracker, Self Care"
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
-              className="w-full px-4 py-2.5 bg-[#051120] border border-[#1a2c42] rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#e0a96d]/50 transition-colors"
+              className="w-full px-4 py-2.5 axiom-input rounded-xl text-sm"
             />
           </div>
 
-          {/* Title */}
           <div>
-            <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest font-bold block mb-1.5">OBJECTIVE TITLE (Short name)</label>
+            <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Objective Title</label>
             <input
               type="text"
               required
-              placeholder="e.g. rg, fitness tracker, deep work blueprint"
+              placeholder="e.g. Deep work blueprint, Threshold training"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2.5 bg-[#051120] border border-[#1a2c42] rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#e0a96d]/50 transition-colors"
+              className="w-full px-4 py-2.5 axiom-input rounded-xl text-sm"
             />
           </div>
 
-          {/* Description */}
           <div>
-            <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest font-bold block mb-1.5">DESCRIPTION / OUTCOME METRICS</label>
+            <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Description & Outcome Metrics</label>
             <textarea
-              placeholder="e.g. regfg, weekly target for threshold test..."
+              placeholder="Define measurable targets and desired outcomes..."
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-2.5 bg-[#051120] border border-[#1a2c42] rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#e0a96d]/50 transition-colors resize-none"
+              className="w-full px-4 py-2.5 axiom-input rounded-xl text-sm resize-none"
             />
           </div>
 
-          {/* Row: Category & Due Date */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest font-bold block mb-1.5">BLUEPRINT CATEGORY</label>
+              <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Blueprint Category</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value as GoalCategory)}
-                className="w-full px-4 py-2.5 bg-[#051120] border border-[#1a2c42] rounded-xl text-sm text-gray-300 focus:outline-none focus:border-[#e0a96d]/50 transition-colors cursor-pointer"
+                className="w-full px-4 py-2.5 axiom-input rounded-xl text-sm cursor-pointer"
               >
-                <option value="PERSONAL">PERSONAL</option>
-                <option value="FITNESS">FITNESS</option>
-                <option value="BUSINESS">BUSINESS</option>
-                <option value="ACADEMIC">ACADEMIC</option>
-                <option value="LIFESTYLE">LIFESTYLE</option>
+                <option value="PERSONAL">Personal</option>
+                <option value="FITNESS">Fitness</option>
+                <option value="BUSINESS">Business</option>
+                <option value="ACADEMIC">Academic</option>
+                <option value="LIFESTYLE">Lifestyle</option>
               </select>
             </div>
 
             <div>
-              <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest font-bold block mb-1.5">TARGET COMPLETION DATE</label>
-              <div className="relative">
-                <input
-                  type="date"
-                  value={dueDate}
-                  onChange={(e) => setDueDate(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-[#051120] border border-[#1a2c42] rounded-xl text-sm text-white focus:outline-none focus:border-[#e0a96d]/50 transition-colors"
-                />
-              </div>
+              <label className="text-xs font-medium text-[#A8B8CC] block mb-1.5">Target Completion Date</label>
+              <input
+                type="date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+                className="w-full px-4 py-2.5 axiom-input rounded-xl text-sm tabular-nums"
+              />
             </div>
           </div>
 
-          {/* Initial Milestones / Tasks */}
           <div>
-            <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest font-bold block mb-1">
-              INITIAL MILESTONES (Optional)
+            <label className="text-xs font-medium text-[#A8B8CC] block mb-1">
+              Initial Milestones (Optional)
             </label>
-            <span className="text-[9px] text-gray-500 block mb-1.5 font-medium leading-tight">
-              Type tasks separated by a comma or newline. You can also customize them later in Planning & Tasks.
+            <span className="text-[11px] text-[#A8B8CC]/80 block mb-1.5 leading-snug">
+              Separate tasks with a comma or newline. You can refine them later in Planning & Tasks.
             </span>
             <textarea
-              placeholder="e.g. Read 2 chapters of deep focus, Complete 3 Pomodoros, Complete weekly review"
+              placeholder="e.g. Read 2 chapters of deep focus, Complete 3 Pomodoros, Weekly review"
               rows={2}
               value={milestonesInput}
               onChange={(e) => setMilestonesInput(e.target.value)}
-              className="w-full px-4 py-2.5 bg-[#051120] border border-[#1a2c42] rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-[#e0a96d]/50 transition-colors resize-none"
+              className="w-full px-4 py-2.5 axiom-input rounded-xl text-sm resize-none"
             />
           </div>
 
-          {/* Footer Action buttons */}
-          <div className="flex justify-end gap-3 pt-4 border-t border-[#12243d]">
+          <div className="flex justify-end gap-3 pt-4 border-t border-[#1D3555]">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-transparent text-gray-400 hover:text-white hover:bg-[#10243d] rounded-xl text-xs font-bold transition-colors"
+              className="px-4 py-2 axiom-btn-secondary rounded-xl text-xs cursor-pointer"
             >
-              CANCEL
+              Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2.5 bg-[#e0a96d] hover:bg-[#f3bf84] text-[#071324] font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all duration-200 active:scale-95"
+              className="px-5 py-2.5 axiom-btn-primary text-xs rounded-xl flex items-center justify-center gap-1.5 cursor-pointer"
             >
-              <Plus size={14} />
-              <span>CREATE STRATEGIC OBJECTIVE</span>
+              <Plus size={14} strokeWidth={2.5} />
+              <span>Create Strategic Objective</span>
             </button>
           </div>
-
         </form>
       </div>
     </div>

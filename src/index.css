@@ -1,24 +1,209 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-/* Custom scrollbar for consistent sleek design */
+:root {
+  --axiom-bg-canvas: #07111F;
+  --axiom-bg-elevated: #0B172A;
+  --axiom-bg-surface: #101F35;
+  --axiom-bg-surface-hover: #142844;
+  --axiom-bg-inset: #0B172A;
+
+  --axiom-border-subtle: #1D3555;
+  --axiom-border-default: #1D3555;
+  --axiom-border-accent: #00A3FF;
+
+  --axiom-accent: #0066FF;
+  --axiom-accent-hover: #00A3FF;
+  --axiom-accent-soft: rgba(0, 102, 255, 0.16);
+  --axiom-secondary: #00A3FF;
+  --axiom-emerald: #34d399;
+
+  --axiom-text-primary: #FFFFFF;
+  --axiom-text-secondary: #A8B8CC;
+  --axiom-text-muted: #7B90AB;
+
+  --axiom-shadow-card: 0 12px 32px -12px rgba(3, 9, 20, 0.78);
+  --axiom-shadow-elevated: 0 20px 48px -16px rgba(3, 9, 20, 0.9);
+  --axiom-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html,
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--axiom-bg-canvas);
+    color: var(--axiom-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid rgba(0, 163, 255, 0.75);
+    outline-offset: 2px;
+  }
+}
+
+/* Deep Navy atmospheric canvas with subtle Electric Blue & Bright Blue glow and dot-grid */
+.axiom-canvas-bg {
+  background-color: var(--axiom-bg-canvas);
+  background-image:
+    radial-gradient(60% 45% at 88% 0%, rgba(0, 102, 255, 0.14) 0%, transparent 70%),
+    radial-gradient(50% 45% at 10% 95%, rgba(0, 163, 255, 0.09) 0%, transparent 70%),
+    radial-gradient(rgba(29, 53, 85, 0.55) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px;
+  background-position: 0 0, 0 0, 0 0;
+}
+
+/* Primary single-elevation card surface */
+.axiom-card {
+  background: linear-gradient(180deg, #101F35 0%, #0D1B2F 100%);
+  border: 1px solid var(--axiom-border-subtle);
+  box-shadow: var(--axiom-shadow-card);
+  backdrop-filter: blur(12px);
+  transition:
+    border-color 180ms var(--axiom-ease-out),
+    background 180ms var(--axiom-ease-out),
+    transform 180ms var(--axiom-ease-out),
+    box-shadow 180ms var(--axiom-ease-out);
+}
+
+.axiom-card-interactive:hover {
+  border-color: var(--axiom-border-accent);
+  background: linear-gradient(180deg, #132640 0%, #101F35 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px -14px rgba(0, 102, 255, 0.25);
+}
+
+/* Inset panel surface */
+.axiom-inset {
+  background-color: var(--axiom-bg-inset);
+  border: 1px solid var(--axiom-border-subtle);
+}
+
+/* Unified form input */
+.axiom-input {
+  background-color: var(--axiom-bg-inset);
+  border: 1px solid var(--axiom-border-default);
+  color: var(--axiom-text-primary);
+  transition:
+    border-color 160ms var(--axiom-ease-out),
+    box-shadow 160ms var(--axiom-ease-out),
+    background-color 160ms var(--axiom-ease-out);
+}
+
+.axiom-input::placeholder {
+  color: var(--axiom-text-muted);
+}
+
+.axiom-input:hover {
+  border-color: #2A4B75;
+}
+
+.axiom-input:focus {
+  outline: none;
+  border-color: var(--axiom-secondary);
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.24);
+}
+
+/* Button primitives */
+.axiom-btn-primary {
+  background: linear-gradient(135deg, #0066FF 0%, #00A3FF 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 8px 20px -6px rgba(0, 102, 255, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition:
+    transform 150ms var(--axiom-ease-out),
+    box-shadow 180ms var(--axiom-ease-out),
+    filter 180ms var(--axiom-ease-out);
+}
+
+.axiom-btn-primary:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 12px 26px -6px rgba(0, 163, 255, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+  transform: translateY(-1px);
+}
+
+.axiom-btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.axiom-btn-secondary {
+  background-color: #0B172A;
+  border: 1px solid #1D3555;
+  color: #FFFFFF;
+  font-weight: 600;
+  transition:
+    background-color 160ms var(--axiom-ease-out),
+    border-color 160ms var(--axiom-ease-out),
+    color 160ms var(--axiom-ease-out),
+    transform 150ms var(--axiom-ease-out);
+}
+
+.axiom-btn-secondary:hover {
+  background-color: #101F35;
+  border-color: #00A3FF;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.axiom-btn-secondary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Modal panel surface */
+.axiom-modal-panel {
+  background: linear-gradient(180deg, #101F35 0%, #0B172A 100%);
+  border: 1px solid #1D3555;
+  box-shadow: var(--axiom-shadow-elevated);
+}
+
+/* Tabular figures helper */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #071120;
+  background: #07111F;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
+  background: #1D3555;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #0066FF;
+}
+
+/* Accessibility: respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
